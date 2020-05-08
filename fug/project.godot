@@ -15,8 +15,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="godottest"
-run/main_scene="res://Main.tscn"
+config/name="fug"
+run/main_scene="res://scripts/Main.tscn"
 config/icon="res://icon.png"
 
 [input]
