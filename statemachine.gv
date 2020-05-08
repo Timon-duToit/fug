@@ -1,0 +1,77 @@
+digraph graph_name {
+  graph [
+    charset = "UTF-8";
+    bgcolor = "#343434",
+    fontcolor = white, fontsize = 18,
+    style = "filled",
+    rankdir = LR,
+    margin = 0.2,
+    splines = spline,
+    ranksep = 0.5,
+    nodesep = 0.5,
+  ];
+
+  node [
+    colorscheme = "rdylgn11",
+    fontsize = 16,
+    fontcolor = 6,
+    fontname = "Migu 1M",
+    color = 7,
+    fillcolor = 11,
+    fixedsize = true,
+    height = 0.6,
+    width = 1,
+    shape="box",
+  ];
+
+  edge [
+    style = solid,
+    fontsize = 14,
+    fontcolor = cyan,
+    fontname = "Migu 1M",
+    color = darkgray,
+    labelfloat = false,
+    labeldistance = 2.5,
+    labelangle = 70,
+  ];
+
+  Default -> Meele [label="A"]
+  Default -> Dash [label="S"]
+  Default -> Grabbing [label="a"]
+
+  Meele -> Default [color="magenta"]
+  Meele -> Shove [label="D"]
+
+  Dash -> Shove [label="A"]
+  Dash -> Default [color="magenta"]
+  Dash -> AOEW [label="a"]
+
+  AOEW -> Default [color="magenta"]
+
+  Shove -> Default [color="magenta"]
+
+  Grabbing -> Pulling [color="magenta"]
+  Grabbing -> Dist_Grab [label="a"]
+  Grabbing -> Whip [label="A"]
+  Whip -> Default [color="magenta"]
+
+  Dist_Grab -> Dist_Grab [label="a"]
+  Dist_Grab -> Pulling [color="magenta"]
+  Pulling -> Throw [label="D"]
+  Throw -> Default [color="magenta"]
+
+  Pulling -> Shield [color="magenta"]
+  Shield -> Mace [label="A"]
+  Shield -> Default [label="a"]
+  Shield -> DDash [label="D"]
+
+  DDash -> Shield [color="magenta"]
+
+  Mace -> Shield [color="magenta"]
+  Mace -> Throw [label="D"]
+
+  {rank=same; Mace Shield DDash}
+  {rank=same; Grabbing Whip}
+  {rank=same; AOEW Dash}
+  {rank=same; Dist_Grab Pulling}
+}
