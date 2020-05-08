@@ -1,0 +1,19 @@
+#+TITLE: Notes
+
+* Game
+** Horde, Waves
+** Enemies
+We can just steal the Killing Floor 2 / Left 4 Dead enemies
+*** Brute
+*** Norm (medium in every respect)
+
+* Player
+** Can buy stationary items with money
+- Turrets etc.
+*** Can shape the environment to his advantage
+- Barriers
+- Barbed wire etc.
+
+** Has Abilities with some other special currency
+*** Combo system
+- The abilities can be used in combination for a combo system
