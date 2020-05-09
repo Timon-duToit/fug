@@ -6,12 +6,14 @@ var DEBUG := false
 
 # We can't specify the State type here due to an engine bug
 var state : Node
+var last_state := ""
 
 func _ready() -> void:
 	state = get_child(0)
 	_enter_state()
 	
 func change_to(node : String) -> void:
+	last_state = state.name
 	state = get_node(node)
 	_enter_state()
 

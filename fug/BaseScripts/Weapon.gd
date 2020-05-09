@@ -34,7 +34,6 @@ func _on_Punch_body_entered(body: Node) -> void:
 	
 	
 func attack() -> void:
-	print("ATTACKING")
 	_collider.set_deferred("disabled", false)
 	_attacking = true
 	_attack_time = 0
