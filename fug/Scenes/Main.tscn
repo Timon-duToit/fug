@@ -1,3 +1,110 @@
-[gd_scene format=2]
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/Background.jpg" type="Texture" id=1]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://BaseScripts/CameraFollower.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 46.5109, 47.1913 )
+
+[sub_resource type="SegmentShape2D" id=2]
+a = Vector2( -838.515, -526.202 )
+b = Vector2( -843.037, 614.854 )
+
+[sub_resource type="SegmentShape2D" id=3]
+a = Vector2( -852.081, -494.548 )
+b = Vector2( 881.578, -491.924 )
+
+[sub_resource type="SegmentShape2D" id=4]
+a = Vector2( 841.142, -509.505 )
+b = Vector2( 842.9, 620.945 )
+
+[sub_resource type="SegmentShape2D" id=5]
+a = Vector2( 878.062, 589.299 )
+b = Vector2( -908.155, 587.541 )
 
 [node name="Main" type="Node"]
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 2.51758, 45.9825 )
+z_index = -100
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+
+[node name="Walls" type="StaticBody2D" parent="."]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls"]
+position = Vector2( 2.84399, 94.9896 )
+rotation = 0.0300979
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls"]
+position = Vector2( -45.169, 399.358 )
+rotation = 0.179167
+shape = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
+polygon = PoolVector2Array( -247.335, -4.59378, -648.879, -2.49878, -636.309, 35.2114, -602.091, 48.4798, -297.616, 47.7815, -296.219, 295.691, -262, 295.691, -244.542, 225.159 )
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="Walls"]
+skew = 4.37114e-08
+polygon = PoolVector2Array( 542.854, -196.077, 719.324, -207.422, 716.173, -245.237, 665.753, -254.69, 603.358, -245.867, 559.241, -247.127, 544.115, -231.371 )
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Walls"]
+skew = 4.37114e-08
+polygon = PoolVector2Array( 704.887, 47.1945, 705.914, 95.4486, 529.324, 98.0154, 456.943, 24.0941, 454.89, -2.08636, 502.63, -2.59971, 503.657, -51.3672, 603.245, -52.3939, 605.812, 43.0877 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Walls"]
+skew = 4.37114e-08
+polygon = PoolVector2Array( 508.49, 446.702, 607.565, 446.702, 607.052, 345.573, 706.64, 346.6, 705.1, 247.525, 656.846, 247.011, 656.846, 295.266, 556.744, 296.292, 554.691, 396.907, 507.463, 397.934 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Walls"]
+skew = 4.37114e-08
+polygon = PoolVector2Array( 357.017, 597.008, 354.224, 272.281, 280.898, 196.162, 257.155, 194.766, 255.06, 243.649, 204.779, 245.744, 203.383, 344.21, 305.34, 348.4, 304.642, 594.913 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Walls"]
+polygon = PoolVector2Array( -658.051, 234.686, -637.799, 441.393, -485.561, 449.773, -500.226, 400.89, -588.915, 398.096, -609.865, 238.876 )
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="Walls"]
+polygon = PoolVector2Array( 301.469, -364.984, 294.536, -158.892, 206.931, -164.565, 215.755, -355.53 )
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="Walls"]
+polygon = PoolVector2Array( -99.6367, -505.184, -97.746, -426.403, -72.536, -401.823, 50.9929, -409.386, 65.4886, -434.596, 56.6651, -503.293 )
+
+[node name="CollisionPolygon2D9" type="CollisionPolygon2D" parent="Walls"]
+polygon = PoolVector2Array( 554.766, -502.27, 558.18, -390.592, 595.243, -398.883, 597.682, -461.793, 707.409, -453.99, 705.946, -507.634 )
+
+[node name="CollisionPolygon2D10" type="CollisionPolygon2D" parent="Walls"]
+polygon = PoolVector2Array( -448.8, -173.713, -448.8, -153.461, -323.099, -156.254, -246.282, -230.976, -321.004, -301.508 )
+
+[node name="CollisionPolygon2D11" type="CollisionPolygon2D" parent="Walls"]
+polygon = PoolVector2Array( -858.187, -429.327, -766.171, -421.764, -730.877, -336.05, -748.524, -296.345, -732.767, -270.504, -754.826, -204.958, -652.095, -200.547, -652.095, -158.32, -745.372, -146.976, -858.817, -157.69 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls"]
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls"]
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Walls"]
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Walls"]
+shape = SubResource( 5 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+
+[node name="CameraFollower" parent="Player" instance=ExtResource( 3 )]
+
+[node name="Camera2D" type="Camera2D" parent="Player/CameraFollower"]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+smoothing_enabled = true
