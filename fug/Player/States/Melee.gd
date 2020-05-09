@@ -9,5 +9,6 @@ func enter(controller_ : StateMachine) -> void:
 	# do attack
 	_animator.play("Attack")
 	_sword.attack()
-	yield(get_tree().create_timer(melee_time), "timeout")
-	controller_.change_to("Default")
+	_callback(funcref(controller, "change_to"), ["Default"], melee_time)
+	# yield(get_tree().create_timer(melee_time), "timeout")
+	# controller_.change_to("Default")

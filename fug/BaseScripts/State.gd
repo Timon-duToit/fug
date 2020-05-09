@@ -11,8 +11,6 @@ func enter(controller_: StateMachine) -> void:
 
 func process(delta : float) -> void:
 	var to_remove = []
-	if len(_callbacks):
-		print(_callbacks[0]._time)
 	for c in _callbacks:
 		if c.update(delta):
 			to_remove.append(c)

@@ -6,4 +6,6 @@ func _ready():
 
 
 func _process(delta):
-	look_at(get_global_mouse_position())
+	var delta_angle = get_angle_to(get_global_mouse_position())
+	# HACK: don't use lerp / multiply by delta here or use a proper formula
+	rotation += lerp(0, delta_angle, 20 * delta)

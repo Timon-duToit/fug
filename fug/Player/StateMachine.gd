@@ -2,7 +2,7 @@ extends Node
 
 class_name StateMachine
 
-const DEBUG := true
+var DEBUG := false
 
 # We can't specify the State type here due to an engine bug
 var state : Node

@@ -1,12 +1,19 @@
 extends MobState
 
+export var attack_delay : float = 0.2
+
+onready var _weapon := owner.get_node("Punch")
 
 func enter(controller_ : StateMachine) -> void:
 	.enter(controller_)
 	_animator.play("Attack")
-	var anim_time = get_animation_time(_animator, "Attack")
+	# _weapon.attack()
 	
+	var anim_time = get_animation_time(_animator, "Attack")
+	if anim_time <= attack_delay:
+		print("ERROR: won't attack if animation time is less then attack_delay")
+	
+	_callback(funcref(_weapon, "attack"), [], attack_delay)
 	_callback(funcref(controller, "change_to"), ["Target"], anim_time)
 	# yield(get_tree().create_timer(anim_time), "timeout")
 	# controller.change_to("Target")
-

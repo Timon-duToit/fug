@@ -1,7 +1,10 @@
 extends Area2D
 
+# TODO: change to inherit Weapon
+
 export var sweep := -PI
-export var sweep_time : float = 0.5
+export var start_delay : float = 0.2
+export var sweep_time : float = 0.1
 
 var _attacking := false
 var _sweep_time : float
@@ -12,6 +15,7 @@ func _ready() -> void:
 	_collider.disabled = true
 	
 func attack() -> void:
+	yield(get_tree().create_timer(start_delay), "timeout")
 	_collider.set_deferred("disabled", false)
 	_attacking = true
 	_sweep_time = 0
@@ -29,5 +33,4 @@ func _physics_process(delta: float) -> void:
 
 func _on_Sword_body_entered(body: Node) -> void:
 	if body is Mob:
-		print("hit")
 		body.hit()
