@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Mobs/Mob.gd" type="Script" id=1]
 [ext_resource path="res://Mobs/Assets/sprBoss1Attack_strip5.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Mobs/States/Target.gd" type="Script" id=10]
 [ext_resource path="res://Mobs/States/Attack.gd" type="Script" id=11]
 [ext_resource path="res://Mobs/Punch.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Mobs/States/Shoved.gd" type="Script" id=13]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -149,6 +150,9 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=24]
 radius = 7.41665
 
+[sub_resource type="CircleShape2D" id=25]
+radius = 16.8732
+
 [node name="Mob" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 7
@@ -162,6 +166,16 @@ animation = "Idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.996498, 0.664333 )
 shape = SubResource( 24 )
+
+[node name="ShoveArea" type="Area2D" parent="."]
+skew = 4.37114e-08
+collision_layer = 0
+collision_mask = 4
+
+[node name="Collider" type="CollisionShape2D" parent="ShoveArea"]
+position = Vector2( -0.166084, 0 )
+shape = SubResource( 25 )
+disabled = true
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 6 )
@@ -178,8 +192,12 @@ script = ExtResource( 11 )
 [node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource( 9 )
 
+[node name="Shoved" type="Node" parent="StateMachine"]
+script = ExtResource( 13 )
+
 [node name="Cleanup" type="Node" parent="."]
 script = ExtResource( 7 )
 
 [node name="Punch" parent="." instance=ExtResource( 12 )]
 position = Vector2( 8.96852, 0.498246 )
+[connection signal="body_entered" from="ShoveArea" to="StateMachine/Shoved" method="_on_ShoveArea_body_entered"]

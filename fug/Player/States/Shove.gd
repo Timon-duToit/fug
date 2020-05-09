@@ -1,15 +1,26 @@
 extends PlayerState
 
+# For now this mode can only be accessed via attack -> dash
+
 export var dash_dist : float = 120
-export var dash_time : float = 0.2
+export var dash_time : float = 0.5
 export var dash_curve : Curve = Curve.new()
 
 var _direction : Vector2
 # the distance moved through the curve (normalized)
 var _curve_position : float
 
+
+func _on_Sword_hit():
+	controller.change_to("Default")
+
+
 func enter(controller_ : StateMachine) -> void:
+	# HACK: there should be a better way to do these references
+	_player.sword.connect("hit", self, "_on_Sword_hit")
 	.enter(controller_)
+	_animator.play("Shove")
+	_player.sword.shove()
 	_direction = Vector2()
 	if Input.is_action_pressed("up"):
 		_direction += Vector2.UP
@@ -20,6 +31,7 @@ func enter(controller_ : StateMachine) -> void:
 	if Input.is_action_pressed("left"):
 		_direction += Vector2.LEFT
 	_direction = _direction.normalized()
+	owner.body.rotation = Vector2.RIGHT.angle_to(_direction)
 	_curve_position = 0
 
 

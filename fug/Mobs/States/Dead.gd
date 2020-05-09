@@ -2,8 +2,9 @@ extends MobState
 
 func enter(controller_ : StateMachine) -> void:
 	.enter(controller_)
-	_animator.play("Death")
-	_animator.rotate(PI)
+	if _animator.animation != "Death":
+		_animator.play("Death")
+		_animator.rotate(PI)
 	_collider.set_deferred("disabled", true)
 	yield(get_tree().create_timer(1), "timeout")
 	
