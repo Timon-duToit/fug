@@ -3,6 +3,51 @@ extends Node
 class_name State
 
 var controller : StateMachine
+var _callbacks = []
 
 func enter(controller_: StateMachine) -> void:
 	controller = controller_
+	_callbacks = []
+
+func process(delta : float) -> void:
+	var to_remove = []
+	if len(_callbacks):
+		print(_callbacks[0]._time)
+	for c in _callbacks:
+		if c.update(delta):
+			to_remove.append(c)
+	for c in to_remove:
+		_callbacks.erase(c)
+
+# Utility funcitons
+static func get_animation_time(animator : AnimatedSprite, animation : String) -> float:
+	# Returns the total animation time for the currently selected animation
+	var frames = animator.frames
+	return  frames.get_frame_count(animation) \
+			/ frames.get_animation_speed(animation) \
+			/ animator.speed_scale
+
+func _callback(callback : FuncRef, arguments : Array, time : float) -> void:
+	# adds timed callback function to this state that will be revoked by
+	# enter()
+	self._callbacks.append(Callback.new(time, callback, arguments))
+
+class Callback:
+	# Used to do timings that can be cleared again
+	# Opposed to coroutines
+	var _end_time : float
+	var _callback : FuncRef
+	var _arguments : Array
+	var _time : float = 0
+	
+	func _init(time : float, callback : FuncRef, arguments : Array) -> void:
+		_end_time = time
+		_callback = callback
+		_arguments = arguments
+	
+	func update(delta : float) -> bool:
+		_time += delta
+		if _time >= _end_time:
+			_callback.call_funcv(_arguments)
+			return true
+		return false

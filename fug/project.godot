@@ -9,10 +9,35 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "LevelManager",
+"language": "GDScript",
+"path": "res://BaseScripts/LevelManager.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Mob",
+"language": "GDScript",
+"path": "res://Mobs/Mob.gd"
+}, {
+"base": "State",
+"class": "MobState",
+"language": "GDScript",
+"path": "res://Mobs/States/MobState.gd"
+}, {
 "base": "State",
 "class": "MoveState",
 "language": "GDScript",
 "path": "res://Player/States/MoveState.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Player/Player.gd"
+}, {
+"base": "Node2D",
+"class": "Spawnpoint",
+"language": "GDScript",
+"path": "res://BaseScripts/Spawnpoint.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -25,7 +50,12 @@ _global_script_classes=[ {
 "path": "res://Player/StateMachine.gd"
 } ]
 _global_script_class_icons={
+"LevelManager": "",
+"Mob": "",
+"MobState": "",
 "MoveState": "",
+"Player": "",
+"Spawnpoint": "",
 "State": "",
 "StateMachine": ""
 }
@@ -35,6 +65,10 @@ _global_script_class_icons={
 config/name="fug"
 run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GameManager="*res://BaseScripts/GameManager.gd"
 
 [input]
 

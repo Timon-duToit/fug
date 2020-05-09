@@ -2,8 +2,10 @@ extends Node
 
 class_name StateMachine
 
+const DEBUG := true
+
 # We can't specify the State type here due to an engine bug
-var state : Object
+var state : Node
 
 func _ready() -> void:
 	state = get_child(0)
@@ -11,8 +13,11 @@ func _ready() -> void:
 	
 func change_to(node : String) -> void:
 	state = get_node(node)
+	_enter_state()
 
 func _enter_state() -> void:
+	if DEBUG:
+		print("FSM: entering %s" % state.name)
 	state.enter(self)
 
 func _process(delta: float) -> void:
@@ -29,7 +34,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 func _unhandled_key_input(event: InputEventKey) -> void:
 	if state.has_method("unhandled_key_input"):
-		state.unhandled_key_input
+		state.unhandled_key_input(event)
 
 func _notification(what: int) -> void:
 	if state && state.has_method("notification"):

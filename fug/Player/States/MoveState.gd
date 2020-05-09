@@ -17,6 +17,7 @@ func enter(controller_: StateMachine) -> void:
 	_animator.play("Idle")
 
 func process(delta : float) -> void:
+	.process(delta)
 	_handle_inputs()
 
 func physics_process(delta : float) -> void:

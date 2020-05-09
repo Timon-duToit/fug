@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Background.jpg" type="Texture" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://BaseScripts/CameraFollower.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Mobs/Mob.tscn" type="PackedScene" id=4]
+[ext_resource path="res://BaseScripts/LevelManager.gd" type="Script" id=5]
+[ext_resource path="res://BaseScripts/Spawnpoint.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 46.5109, 47.1913 )
@@ -24,6 +27,7 @@ a = Vector2( 878.062, 589.299 )
 b = Vector2( -908.155, 587.541 )
 
 [node name="Main" type="Node"]
+script = ExtResource( 5 )
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 2.51758, 45.9825 )
@@ -36,6 +40,8 @@ __meta__ = {
 [node name="SpawnPoint" type="Node2D" parent="."]
 
 [node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 7
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -88,16 +94,25 @@ polygon = PoolVector2Array( -448.8, -173.713, -448.8, -153.461, -323.099, -156.2
 [node name="CollisionPolygon2D11" type="CollisionPolygon2D" parent="Walls"]
 polygon = PoolVector2Array( -858.187, -429.327, -766.171, -421.764, -730.877, -336.05, -748.524, -296.345, -732.767, -270.504, -754.826, -204.958, -652.095, -200.547, -652.095, -158.32, -745.372, -146.976, -858.817, -157.69 )
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls"]
+[node name="LevelBoundry" type="StaticBody2D" parent="."]
+skew = 4.37114e-08
+collision_layer = 8
+collision_mask = 3
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="LevelBoundry"]
+skew = 4.37114e-08
 shape = SubResource( 2 )
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="LevelBoundry"]
+skew = 4.37114e-08
 shape = SubResource( 3 )
 
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="Walls"]
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="LevelBoundry"]
+skew = 4.37114e-08
 shape = SubResource( 4 )
 
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="Walls"]
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="LevelBoundry"]
+skew = 4.37114e-08
 shape = SubResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
@@ -108,3 +123,14 @@ shape = SubResource( 5 )
 current = true
 zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true
+
+[node name="Mob" parent="." instance=ExtResource( 4 )]
+position = Vector2( 106.621, -94.0771 )
+
+[node name="Spawnpoints" type="Node" parent="."]
+
+[node name="Spawnpoint" parent="Spawnpoints" instance=ExtResource( 6 )]
+position = Vector2( -198.903, -100.477 )
+mob_scene = ExtResource( 4 )
+
+[editable path="Spawnpoints/Spawnpoint"]
