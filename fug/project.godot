@@ -8,9 +8,26 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "State",
+"class": "MoveState",
+"language": "GDScript",
+"path": "res://Player/States/MoveState.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://BaseScripts/State.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://Player/StateMachine.gd"
+} ]
 _global_script_class_icons={
-
+"MoveState": "",
+"State": "",
+"StateMachine": ""
 }
 
 [application]
