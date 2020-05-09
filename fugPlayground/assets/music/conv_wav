@@ -1,2 +1,0 @@
-#!/bin/sh
-ffmpeg -i $1 -acodec pcm_s16le -ar 48000 $2
