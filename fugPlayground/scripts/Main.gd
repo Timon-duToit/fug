@@ -28,7 +28,7 @@ func new_game():
 	emit_signal("new_game")
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
-	
+
 
 func _on_MobTimer_timeout():
 	$MobPath/MobSpawnLocation.offset = randi()

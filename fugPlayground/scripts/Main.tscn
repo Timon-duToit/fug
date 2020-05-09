@@ -42,7 +42,7 @@ curve = SubResource( 1 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 position = Vector2( -402.681, -241.229 )
-rotation = 0.00939494
+rotation = 0.00939891
 
 [node name="background" type="Sprite" parent="."]
 position = Vector2( 484, 338.737 )
@@ -53,7 +53,6 @@ texture = ExtResource( 4 )
 stream = ExtResource( 5 )
 volume_db = -24.247
 autoplay = true
-[connection signal="attack" from="Player" to="Player/Body/Sword" method="attack"]
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
