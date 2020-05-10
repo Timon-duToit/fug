@@ -6,15 +6,17 @@ signal state_change(new_state)
 
 export var speed : float = 150
 export var acceleration : float = 20
+export var dash_timeout : float = 1
 
 export var dash_dist : float = 120
 export var dash_time : float = 0.2
 export var dash_curve : Curve = Curve.new()
 
-onready var state_machine := $StateMachine
-onready var body := $Body
-onready var sword := $Body/Sword
-onready var animator := $Body/Animator
+onready var state_machine : StateMachine = $StateMachine
+onready var body : Node2D = $Body
+onready var sword : Sword = $Body/Sword
+onready var animator : AnimatedSprite = $Body/Animator
+onready var grappling_hook : GrapplingHook = $GrapplingHook
 
 onready var _collider := $CollisionShape2D
 
@@ -30,6 +32,13 @@ var _movement := Vector2()
 var _dash_direction : Vector2
 var _dash_time : float
 var _dash_curve_position : float
+
+# can't dash if this is positive
+var _dash_timeout : float = 0
+var can_dash : bool setget ,can_dash_get
+
+func _process(delta : float) -> void:
+	_dash_timeout = max(0, _dash_timeout - delta)
 
 func _physics_process(delta : float) -> void:
 	# aim body to camera
@@ -67,8 +76,12 @@ func set_collider_disabled(state : bool) -> void:
 func body_look_at(point : Vector2) -> void:
 	body_target = point - position
 
+func can_dash_get() -> bool:
+	return _dash_timeout <= 0
+
 func dash(_direction : Vector2, time := dash_time) -> void:
 	_dash_direction = _direction
 	_dash_time = time
 	_dash_curve_position = 0
+	_dash_timeout = dash_timeout
 	change_state(DASHING)

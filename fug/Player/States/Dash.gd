@@ -23,6 +23,10 @@ func leave() -> void:
 	.leave()
 	player.disconnect("state_change", self, "on_Player_state_change")
 
+func unhandled_input(event : InputEvent) -> void:
+	if event.is_action_pressed("attack"):
+		controller.change_to("Shove")
+
 func on_Player_state_change(new_state) -> void:
 	if new_state != Player.DASHING:
 		controller.change_to("Default")

@@ -2,6 +2,8 @@ extends Area2D
 
 # TODO: change to inherit Weapon
 
+class_name Sword
+
 signal hit
 
 enum Type {ATTACK, SHOVE}
@@ -9,8 +11,6 @@ enum Type {ATTACK, SHOVE}
 export var shove_strength : float = 400
 export var sweep := -PI
 export var sweep_time : float = 0.1
-
-export var shove_time : float = 0.5
 
 var _attacking := false
 var _attack_time : float
@@ -32,6 +32,12 @@ func attack() -> void:
 	_attacking = true
 	_attack_time = 0
 
+func stop_attack() -> void:
+	_attacking = false
+	if _state == Type.ATTACK:
+		_collider_attack.set_deferred("disabled", true)
+	else:
+		_collider_shove.set_deferred("disabled", true)
 
 func shove() -> void:
 	_state = Type.SHOVE
@@ -46,15 +52,9 @@ func _physics_process(delta: float) -> void:
 	
 	if _state == Type.ATTACK:
 		if _attack_time >= sweep_time:
-			_collider_attack.set_deferred("disabled", true)
-			_attacking = false
+			stop_attack()
 		else:
 			_collider_attack.rotation = lerp(0, sweep, _attack_time / sweep_time)
-	elif _state == Type.SHOVE:
-		if _attack_time >= shove_time:
-			_collider_shove.set_deferred("disabled", true)
-			_attacking = false
-
 
 func _on_Sword_body_entered(body: Node) -> void:
 	if _state == Type.ATTACK && body.has_method("hit"):

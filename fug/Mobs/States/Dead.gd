@@ -6,6 +6,7 @@ func enter(controller_ : StateMachine) -> void:
 		_animator.play("Death")
 		_animator.rotate(PI)
 	_collider.set_deferred("disabled", true)
+	_animator.z_index = -10
 	yield(get_tree().create_timer(1), "timeout")
 	
 	# todo: replce with corpse sprite node

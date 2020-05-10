@@ -14,5 +14,7 @@ func enter(controller_ : StateMachine) -> void:
 
 func unhandled_input(event : InputEvent) -> void:
 	# TODO: check some global dash timeout
-	if event.is_action_pressed("dash"):
+	# you can also dash if the attack began in limbo
+	var can_dash = player.can_dash || controller.last_state == "Limbo"
+	if event.is_action_pressed("dash") && can_dash:
 		controller.change_to("Shove")

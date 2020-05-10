@@ -10,8 +10,9 @@ var _curve_position : float
 
 
 func _on_Sword_hit():
-	controller.change_to("Default")
-
+	# this will call a change state here via the message
+	controller.change_to("Limbo")
+	
 func enter(controller_ : StateMachine) -> void:
 	# HACK: there should be a better way to do these references
 	player.sword.connect("hit", self, "_on_Sword_hit")
@@ -34,9 +35,13 @@ func enter(controller_ : StateMachine) -> void:
 
 func leave() -> void:
 	.leave()
+	# disconnect before changing player state
 	player.disconnect("state_change", self, "on_Player_state_change")
+	player.change_state(Player.MOVING)
+	player.sword.stop_attack()
 	player.sword.disconnect("hit", self, "_on_Sword_hit")
 	
 func on_Player_state_change(new_state) -> void:
+	# player has ended the dash himself
 	if new_state != Player.DASHING:
 		controller.change_to("Default")
