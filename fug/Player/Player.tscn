@@ -270,6 +270,8 @@ shape = SubResource( 1 )
 
 [node name="GrapplingHook" parent="." instance=ExtResource( 17 )]
 skew = 4.37114e-08
+reaction_curve_domain = 100.0
+max_change_speed = 300.0
 
 [node name="Body" type="Node2D" parent="."]
 
@@ -277,11 +279,12 @@ skew = 4.37114e-08
 skew = 4.37114e-08
 frames = SubResource( 44 )
 animation = "Shove"
-frame = 6
+frame = 10
 playing = true
 
 [node name="Sword" parent="Body" instance=ExtResource( 8 )]
 skew = 4.37114e-08
+shove_strength = 400.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 5 )
