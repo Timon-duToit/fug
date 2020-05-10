@@ -10,7 +10,7 @@ var _is_moving := true
 
 func enter(controller_: StateMachine) -> void:
 	.enter(controller_)
-	_animator.play("Walk")
+	mob.play_animation("Walk")
 	
 	# not sure it this way of doing things is "threadsave"
 	_can_attack = false
@@ -24,9 +24,9 @@ func process(delta : float) -> void:
 	var player := GameManager.player
 	var dist = (player.position - owner.position).length()
 	_is_moving = true
-	_animator.play("Walk")
+	mob.play_animation("Walk")
 	if dist < attack_distance:
-		_animator.play("Idle")
+		mob.play_animation("Idle")
 		_is_moving = false
 		if _can_attack:
 			controller.change_to("Attack")

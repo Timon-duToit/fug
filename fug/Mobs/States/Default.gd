@@ -5,7 +5,7 @@ export var target_distance : float = 800
 
 func enter(controller_: StateMachine) -> void:
 	.enter(controller_)
-	_animator.play("Walk")
+	mob.animator.play("Walk")
 
 func process(delta : float) -> void:
 	.process(delta)

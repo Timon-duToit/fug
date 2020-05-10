@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Player/Weapons/GrapplingHook.gd" type="Script" id=1]
+[ext_resource path="res://Player/Weapons/Assets/TentacleHook.png" type="Texture" id=2]
+[ext_resource path="res://BaseScripts/AnimatedCurve.gd" type="Script" id=3]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.507853, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0.0052356, 0 ), 0.0, 3.3919, 0, 1, Vector2( 0.267016, 0.887931 ), 0.562237, 0.562237, 0, 0, Vector2( 0.994764, 0.991379 ), 0.0422192, 0.0, 0, 0 ]
+script = ExtResource( 3 )
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 5.40735
+height = 8.14963
+
+[node name="GrapplingHook" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 1 )
+attack_time = 1.0
+position_curve_ = SubResource( 1 )
+reaction_curve = SubResource( 3 )
+
+[node name="Area" type="CollisionShape2D" parent="."]
+position = Vector2( 12.3252, 0.166084 )
+rotation = 1.57079
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Area"]
+rotation = -1.5708
+texture = ExtResource( 2 )

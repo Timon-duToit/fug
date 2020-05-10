@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Curve",
+"class": "AnimatedCurve",
+"language": "GDScript",
+"path": "res://BaseScripts/AnimatedCurve.gd"
+}, {
 "base": "Weapon",
 "class": "GrapplingHook",
 "language": "GDScript",
@@ -75,6 +80,7 @@ _global_script_classes=[ {
 "path": "res://BaseScripts/Weapon.gd"
 } ]
 _global_script_class_icons={
+"AnimatedCurve": "",
 "GrapplingHook": "",
 "LevelManager": "",
 "Mob": "",

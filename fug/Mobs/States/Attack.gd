@@ -6,10 +6,10 @@ onready var _weapon := owner.get_node("Punch")
 
 func enter(controller_ : StateMachine) -> void:
 	.enter(controller_)
-	_animator.play("Attack")
+	mob.play_animation("Attack")
 	# _weapon.attack()
 	
-	var anim_time = get_animation_time(_animator, "Attack")
+	var anim_time = get_animation_time(mob.animator, "Attack")
 	if anim_time <= attack_delay:
 		print("ERROR: won't attack if animation time is less then attack_delay")
 	
