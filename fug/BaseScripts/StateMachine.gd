@@ -2,17 +2,22 @@ extends Node
 
 class_name StateMachine
 
-var DEBUG := false
+export var DEBUG := false
 
 # We can't specify the State type here due to an engine bug
-var state : Node
+var state := Node.new()
 var last_state := ""
 
+# this state will be changed to at the next update
+var queue_state := ""
+
 func _ready() -> void:
-	state = get_child(0)
-	_enter_state()
+	# queuing this is necessary to allow all ready functions to end before enter()
+	queue_state = get_child(0).name
 	
 func change_to(node : String) -> void:
+	if state.has_method("leave"):
+		state.leave()
 	last_state = state.name
 	state = get_node(node)
 	_enter_state()
@@ -23,6 +28,10 @@ func _enter_state() -> void:
 	state.enter(self)
 
 func _process(delta: float) -> void:
+	if queue_state:
+		change_to(queue_state)
+		queue_state = ""
+		
 	if state.has_method("process"):
 		state.process(delta)
 

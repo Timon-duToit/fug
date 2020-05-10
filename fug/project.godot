@@ -52,7 +52,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
-"path": "res://Player/StateMachine.gd"
+"path": "res://BaseScripts/StateMachine.gd"
 } ]
 _global_script_class_icons={
 "LevelManager": "",

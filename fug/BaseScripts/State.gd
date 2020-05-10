@@ -4,9 +4,14 @@ class_name State
 
 var controller : StateMachine
 var _callbacks = []
+var is_active := false
 
 func enter(controller_: StateMachine) -> void:
 	controller = controller_
+	is_active = true
+	
+func leave() -> void:
+	is_active = false
 	_callbacks = []
 
 func process(delta : float) -> void:

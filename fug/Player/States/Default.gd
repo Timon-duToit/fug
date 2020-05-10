@@ -17,10 +17,10 @@ func enter(controller_ : StateMachine) -> void:
 
 func process(delta : float) -> void:
 	.process(delta)
-	if _movement.length() > 5:
-		_animator.play("Walking")
+	if player._movement.length() > 5:
+		player.play_animation("Walking")
 	else:
-		_animator.play("Idle")
+		player.play_animation("Idle")
 
 
 func unhandled_input(event : InputEvent) -> void:

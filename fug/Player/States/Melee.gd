@@ -6,8 +6,8 @@ export var start_delay : float = 0.2
 func enter(controller_ : StateMachine) -> void:
 	.enter(controller_)
 	# do attack
-	_animator.play("Attack")
-	_callback(funcref(_player.sword, "attack"), [], start_delay)
+	player.play_animation("Attack")
+	_callback(funcref(player.sword, "attack"), [], start_delay)
 	_callback(funcref(controller, "change_to"), ["Default"], melee_time)
 	# yield(get_tree().create_timer(melee_time), "timeout")
 	# controller_.change_to("Default")

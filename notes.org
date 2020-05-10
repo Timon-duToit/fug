@@ -1,5 +1,18 @@
 #+TITLE: Notes
 
+* 2do
+** Bugs
+- [ ] Statemachine Should control sword
+** Statemachine
+- [ ] General dependency cleanup
+** Player
+- [ ] Give player control over everything
+- [ ] Use Messages to communicate with weapons ?
+** Game structure
+- [ ] Give mobs a way to reference each other
+  - [ ] Limit spawning space
+- [ ] Implement wave system (e.g. Mob  / amount dictionary / class)
+
 * Game
 ** Horde, Waves
 ** Enemies
