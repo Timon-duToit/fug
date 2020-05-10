@@ -7,6 +7,7 @@ signal state_change(new_state)
 export var speed : float = 150
 export var acceleration : float = 20
 export var dash_timeout : float = 1
+export var body_rotate_acceleration : float = 20
 
 export var dash_dist : float = 120
 export var dash_time : float = 0.2
@@ -42,7 +43,7 @@ func _process(delta : float) -> void:
 
 func _physics_process(delta : float) -> void:
 	# aim body to camera
-	body.rotation = lerp(body.rotation, body_target.angle(), 20 * delta)
+	body.rotation = lerp(body.rotation, body_target.angle(), body_rotate_acceleration * delta)
 	if _state == MOVING:
 		_movement = lerp(_movement, movement_target, acceleration * delta)
 		move_and_slide(_movement)

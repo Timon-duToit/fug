@@ -279,7 +279,6 @@ max_change_speed = 300.0
 skew = 4.37114e-08
 frames = SubResource( 44 )
 animation = "Shove"
-frame = 10
 playing = true
 
 [node name="Sword" parent="Body" instance=ExtResource( 8 )]

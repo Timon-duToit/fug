@@ -8,7 +8,10 @@ export var reaction_curve : Curve
 export var reaction_curve_domain : float = 80
 export var max_change_speed : float = 30
 
+enum {NORMAL, GRAPPLED}
+
 var target_position : Vector2
+var _state := NORMAL
 
 onready var _position_curve := AnimatedCurve.new(position_curve_, attack_time)
 
@@ -23,14 +26,18 @@ func attack() -> void:
 
 func stop_attack() -> void:
 	.stop_attack()
-	_collider.hide()
+	if _state == NORMAL:
+		_collider.hide()
 
 func _on_body_entered(body : Node) -> void:
-	if body is Mob:
-		var parent = body.get_parent()
-		parent.remove_child(body)
-		parent.add_child(body)
-		# parent.call_deferred("add_child", body)
+	if _state == NORMAL && body is Mob:
+		_state = GRAPPLED
+		# HACK this will collide a couple times more.
+		_collider.set_deferred("disabled", true)
+		body.get_parent().remove_child(body)
+		_collider.call_deferred("add_child", body)
+		body.position = Vector2.ZERO
+		body.rotation = - PI / 2
 		body._state_machine.change_to("Grappled")
 
 func _reparent_body(body : Node) -> void:
@@ -53,14 +60,21 @@ func _update_target_position(delta : float) -> void:
 			target_position += offset_vector
 		else:
 			target_position += target_move
-			
-			
+
+func _grappled_physics_process(delta : float) -> void:
+	# HACK:
+	look_at(get_global_mouse_position() - position)
+
 func _physics_process(delta : float) -> void:
+	if _state == GRAPPLED:
+		_grappled_physics_process(delta)
+	
 	if not _attacking: return
 	_position_curve.update(delta)
 	_update_target_position(delta)
-	
+
 	var normalized_position = _position_curve.value
 	var delta_vector = target_position - owner.position
 	position = delta_vector * normalized_position
 	rotation = delta_vector.angle()
+	
