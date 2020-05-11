@@ -28,7 +28,7 @@ position = Vector2( 12.4562, 0.104671 )
 skew = 4.37114e-08
 
 [node name="Area" type="CollisionShape2D" parent="."]
-position = Vector2( 22.9197, -0.0318606 )
+position = Vector2( 22.8802, 0.00763868 )
 rotation = 1.57079
 skew = 4.37114e-08
 shape = SubResource( 1 )
@@ -52,7 +52,8 @@ attack_curve = ExtResource( 10 )
 script = ExtResource( 8 )
 reaction_curve = ExtResource( 2 )
 retract_curve = ExtResource( 2 )
-retract_time = 0.5
+retract_time = 0.4
+min_retract_time = 0.4
 
 [node name="Shield" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )

@@ -27,7 +27,7 @@ func change_to(node : String) -> void:
 
 func _enter_state() -> void:
 	if DEBUG:
-		print("FSM: entering %s" % state.name)
+		print("%s | FSM: entering %s" % [owner.name, state.name])
 	state.enter(self)
 
 func _process(delta: float) -> void:

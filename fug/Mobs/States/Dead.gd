@@ -6,7 +6,7 @@ func enter(controller_ : StateMachine) -> void:
 		mob.play_animation("Death")
 		mob.animator.rotate(PI)
 	mob.set_collider_disabled(true)
-	mob.animator.z_index = -10
+	mob.animator.z_index = -20
 	
 	_callback(funcref(self, "_set_death_colors"), [], 1)
 
