@@ -16,7 +16,7 @@ export var reaction_curve : Curve
 export var reaction_curve_domain : float = 80
 export var max_change_speed : float = 30
 
-enum {IDLE, ATTACKING, RETRACTING, GRAPPLED}
+enum {IDLE, ATTACKING, RETRACTING, GRAPPLED, MACING}
 
 var target_position : Vector2
 var _state := IDLE
@@ -43,9 +43,8 @@ func attack() -> void:
 	_retract_animation.reset()
 	target_position = get_global_mouse_position()
 
-func stop_attack() -> void:
-	if _state == ATTACKING:
-		_collider.hide()
+func mace() -> void:
+	if not _grappled_body: return
 
 func release() -> void:
 	if not _state == GRAPPLED: return
@@ -54,6 +53,9 @@ func release() -> void:
 	if _grappled_body.has_method("release"):
 		_grappled_body.release()
 	_drop_body()
+
+func is_holding() -> bool:
+	return _grappled_body != null
 
 func _on_body_entered(body : Node) -> void:
 	# HACK: This method will get called a couple of times due to multiple collisions
@@ -78,7 +80,6 @@ func _reparent_body(body : Node) -> void:
 	_collider.add_child(body)
 	body.global_position = glob_pos
 	body.global_rotation = glob_rot
-	# _collider.call_deferred("add_child", body)
 
 func _drop_body() -> void:
 	var glob_pos = _grappled_body.global_position
@@ -111,32 +112,40 @@ func _grappled_physics_process(delta : float) -> void:
 	# HACK:
 	look_at(get_global_mouse_position() - position)
 
+func _physics_process_attack(delta : float) -> bool:
+	var done_attacking := _attack_animation.update(delta)
+	_update_target_position(delta)
+	var normalized_position = _attack_animation.value
+	var delta_vector = target_position - owner.position
+	position = delta_vector * normalized_position
+	rotation = delta_vector.angle()
+	return done_attacking
+
+func _physics_process_retracting(delta : float) -> bool:
+	# draw body in according to same curve.
+	var done := _retract_animation.update(delta)
+	_update_target_position(delta)
+	# TODO: perhaps just lerp the position and don't use curve?
+	var delta_vector = target_position - owner.position
+	position = delta_vector * _retract_animation.value
+	rotation = delta_vector.angle()
+	
+	if _grappled_body:
+		_grappled_body.position = _body_start_drag_position * _retract_animation.value
+	return done
+
 func _physics_process(delta : float) -> void:
 	match _state:
 		GRAPPLED:
 			_grappled_physics_process(delta)
 		ATTACKING:
-			var done_attacking := _attack_animation.update(delta)
-			_update_target_position(delta)
-			var normalized_position = _attack_animation.value
-			var delta_vector = target_position - owner.position
-			position = delta_vector * normalized_position
-			rotation = delta_vector.angle()
-			if done_attacking:
+			if _physics_process_attack(delta):
 				_state = RETRACTING
 		RETRACTING:
-			# draw body in according to same curve.
-			var done := _retract_animation.update(delta)
-			# TODO: perhaps just lerp the position and don't use curve?
-			var delta_vector = target_position - owner.position
-			position = delta_vector * _retract_animation.value
-			rotation = delta_vector.angle()
-			
-			if _grappled_body:
-				_grappled_body.position = _body_start_drag_position * _retract_animation.value
-			if done:
+			if _physics_process_retracting(delta):
 				emit_signal("done")
 				if _grappled_body:
 					_state = GRAPPLED
 				else:
+					_collider.hide()
 					_state = IDLE

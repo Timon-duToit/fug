@@ -2,11 +2,13 @@
 
 * 2do
 ** Bugs
-- [ ] Statemachine Should control sword
+- [-] Statemachine Should control sword
 ** Statemachine
-- [ ] General dependency cleanup
+- [-] General dependency cleanup
+- [ ] Make grappling Hook drop enemy on death and notify state to change
+- [ ] Update grappling Hook as state machine
 ** Player
-- [ ] Give player control over everything
+- [-] Give player control over everything
 - [ ] Use Messages to communicate with weapons ?
 ** Game structure
 - [ ] Give mobs a way to reference each other

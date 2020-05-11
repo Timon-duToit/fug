@@ -2,11 +2,21 @@ extends KinematicBody2D
 
 class_name Mob
 
+signal death
+
 onready var _state_machine : StateMachine = $StateMachine
 onready var animator : AnimatedSprite = $AnimatedSprite
 onready var _collider : CollisionShape2D = $CollisionShape2D
 onready var shove_area : Area2D = $ShoveArea
 onready var shove_collider : CollisionShape2D = $ShoveArea/Collider
+
+func _ready() -> void:
+	_state_machine.connect("change_state", self, "_on_StateMachine_change_state")
+
+func _on_StateMachine_change_state(last_state_name : String, new_state_name : String):
+	if new_state_name == "Dead":
+		emit_signal("death")
+		print("death mob")
 
 func hit() -> void:
 	_die()
@@ -30,3 +40,6 @@ func get_grappled() -> void:
 
 func release() -> void:
 	_state_machine.change_to("Dead")
+
+func is_dead() -> bool:
+	return _state_machine.state.name == "Dead"

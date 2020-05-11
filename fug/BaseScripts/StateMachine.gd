@@ -2,6 +2,8 @@ extends Node
 
 class_name StateMachine
 
+signal change_state(last_state_name, new_state_name)
+
 export var DEBUG := false
 
 # We can't specify the State type here due to an engine bug
@@ -21,6 +23,7 @@ func change_to(node : String) -> void:
 	last_state = state.name
 	state = get_node(node)
 	_enter_state()
+	emit_signal("change_state", last_state, state.name)
 
 func _enter_state() -> void:
 	if DEBUG:

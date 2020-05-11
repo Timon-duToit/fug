@@ -1,5 +1,9 @@
 extends MoveState
 
+export var start_delay : float = 0.2
+
+var _is_attacking := false
+
 func enter(controller_ : StateMachine) -> void:
 	.enter(controller_)
 	player.grappling_hook.attack()
@@ -11,17 +15,20 @@ func leave() -> void:
 
 func process(delta : float) -> void:
 	.process(delta)
+	if _is_attacking : return
 	if player._movement.length() > 5:
 		player.play_animation("Walking")
 	else:
 		player.play_animation("Idle")
 
 func _on_GrapplingHook_done() -> void:
-	player.grappling_hook.release()
-	controller.change_to("Shield")
+	if player.grappling_hook.is_holding():
+		controller.change_to("Shield")
+	else:
+		controller.change_to("Default")
 
-#func unhandled_input(event : InputEvent) -> void:
-#	if event.is_action_pressed("attack"):
-#		controller.change_to("Melee")
-#	elif event.is_action_pressed("dash") && player.can_dash:
-#		controller.change_to("Dash")
+func unhandled_input(event : InputEvent) -> void:
+	if event.is_action_pressed("attack"):
+		_is_attacking = true
+		player.play_animation("Attack")
+		_callback(funcref(player.sword, "attack"), [], start_delay)
