@@ -1,7 +1,7 @@
 extends MoveState
 
 export var start_delay : float = 0.2
-export var shove_strength : float = 600
+export var shove_strength : float = 400
 
 var _is_attacking := false
 
@@ -39,6 +39,5 @@ func unhandled_input(event : InputEvent) -> void:
 func _on_Sword_hit(body : Mob) -> void:
 	if not body: return
 	if body == player.grappling_hook._grappled_body:
-		print((player.get_global_mouse_position() - body.global_position).normalized())
 		player.grappling_hook.drop_body()
 		body.get_shoved(player.get_global_mouse_position() - body.global_position, shove_strength)

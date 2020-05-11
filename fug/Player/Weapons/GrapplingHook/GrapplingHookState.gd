@@ -27,3 +27,6 @@ func update_target_position(delta : float, target_position : Vector2) -> Vector2
 		else:
 			new_target_position += target_move
 	return new_target_position
+
+func update_line_renderer() -> void:
+	grappling_hook.line.points[1] = grappling_hook.collider.position

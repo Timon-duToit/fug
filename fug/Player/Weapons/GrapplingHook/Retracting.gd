@@ -1,20 +1,29 @@
 extends GrapplingHookState
 
 export var retract_curve : Curve
-export var retract_time : float = 0.2
+export var retract_time : float = 0.5
+export var min_retract_time : float = 0.3
+# the distance to which the retraction time is calculated
+export var nominated_retract_dist : float = 100
 
 var _target_position : Vector2
 var _body_relative_start_position : Vector2
 
-onready var _retract_animation := AnimatedCurve.new(retract_curve, retract_time)
+onready var _retract_animation : AnimatedCurve
 
 func enter(controller_ : StateMachine) -> void:
 	.enter(controller_)
 	_target_position = grappling_hook.collider.global_position
-	_retract_animation.reset()
 	
 	if grappling_hook.has_body():
 		_body_relative_start_position = grappling_hook._grappled_body.position
+	var _retract_time = retract_time * (_target_position - grappling_hook.global_position).length() / nominated_retract_dist
+	_retract_time = max(min_retract_time, _retract_time)
+	_retract_animation = AnimatedCurve.new(retract_curve, _retract_time)
+	_retract_animation.reset()
+	
+func process(delta : float) -> void:
+	update_line_renderer()
 
 func physics_process(delta : float) -> void:
 	var done := _retract_animation.update(delta)

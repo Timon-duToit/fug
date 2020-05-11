@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Player/Weapons/Sword.gd" type="Script" id=1]
+[ext_resource path="res://Assets/music/sound2.wav" type="AudioStream" id=2]
 
 [node name="Sword" type="Area2D"]
 collision_layer = 0
@@ -12,4 +13,8 @@ polygon = PoolVector2Array( -0.0119362, 0.000972748, -6.60901, 28.7503, 8.59898,
 
 [node name="ColliderShove" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -4.75389, -3.55023, 24.5797, -12.2364, 25.8613, 12.8253, -5.46587, 2.99998 )
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+volume_db = -14.0
 [connection signal="body_entered" from="." to="." method="_on_Sword_body_entered"]

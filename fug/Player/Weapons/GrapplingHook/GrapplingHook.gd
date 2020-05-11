@@ -7,6 +7,7 @@ signal drop_body
 
 onready var collider : CollisionShape2D = $Area
 onready var idle_position : Node2D = $IdlePosition
+onready var line : Line2D = $Line2D
 onready var _state_machine : StateMachine = $StateMachine
 
 var _grappled_body : Node
@@ -56,7 +57,14 @@ func drop_body() -> void:
 	if _grappled_body.has_signal("death"):
 		_grappled_body.disconnect("death", self, "_on_Body_death")
 	emit_signal("drop_body")
-
+	
+		# change collision mask back
+	# NOTE: this assumes that the body node type has not changed
+	var body_physics_body := _grappled_body as PhysicsBody2D
+	if not body_physics_body : return
+	body_physics_body.collision_mask = _previous_collision_mask
+	body_physics_body.collision_layer = _previous_collision_layer
+	
 func _drop_body() -> void:
 	# changing the parents will call all collisions
 	if not has_body(): return
@@ -67,7 +75,6 @@ func _drop_body() -> void:
 	var grappled_body := _grappled_body
 	_grappled_body = null
 
-	
 	var glob_pos = grappled_body.global_position
 	var glob_rot = grappled_body.global_rotation
 	grappled_body.get_parent().remove_child(grappled_body)
@@ -75,13 +82,7 @@ func _drop_body() -> void:
 	grappled_body.global_position = glob_pos
 	grappled_body.global_rotation = glob_rot
 	_previous_body_parent = null
-	
-	# change collision mask back
-	# NOTE: this assumes that the body node type has not changed
-	var body_physics_body := grappled_body as PhysicsBody2D
-	if not body_physics_body : return
-	body_physics_body.collision_mask = _previous_collision_mask
-	body_physics_body.collision_layer = _previous_collision_layer
+
 
 func has_body() -> bool:
 	return _grappled_body != null

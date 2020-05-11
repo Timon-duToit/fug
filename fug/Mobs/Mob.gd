@@ -10,6 +10,7 @@ onready var animator : AnimatedSprite = $AnimatedSprite
 onready var _collider : CollisionShape2D = $CollisionShape2D
 onready var shove_area : Area2D = $ShoveArea
 onready var shove_collider : CollisionShape2D = $ShoveArea/Collider
+onready var audio := $Audio
 
 func _ready() -> void:
 	_state_machine.connect("change_state", self, "_on_StateMachine_change_state")
@@ -28,7 +29,6 @@ func get_shoved(direction : Vector2, shove_strength : float) -> void:
 	_state_machine.change_to("Shoved")
 	_state_machine.state.init_shove(direction, shove_strength)
 	emit_signal("shoved")
-	# print("%s %s %s" % [other_position, other_rotation, shove_strength])
 
 func play_animation(animation : String) -> void:
 	animator.play(animation)

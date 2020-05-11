@@ -1,7 +1,7 @@
 extends PlayerState
 
 # For now this mode can only be accessed via attack -> dash
-export var shove_strength : float = 400
+export var shove_strength : float = 650
 export var dash_time : float = 0.5
 
 var _direction : Vector2

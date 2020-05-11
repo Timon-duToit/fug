@@ -20,7 +20,7 @@ var _state = Type.ATTACK
 
 onready var _collider_attack := $ColliderAttack
 onready var _collider_shove := $ColliderShove
-
+onready var _audio := $Audio
 
 func _ready() -> void:
 	_collider_attack.disabled = true
@@ -33,6 +33,7 @@ func attack() -> void:
 	_collider_attack.set_deferred("disabled", false)
 	_attacking = true
 	_attack_time = 0
+	_audio_effect()
 
 func stop_attack() -> void:
 	_attacking = false
@@ -61,9 +62,9 @@ func _physics_process(delta: float) -> void:
 
 func _on_Sword_body_entered(body: Node) -> void:
 	emit_signal("hit", body)
-#	if _type == Type.ATTACK && body.has_method("hit"):
-#		body.hit()
-#		emit_signal("hit")
-#	elif _type == Type.SHOVE && body.has_method("get_shoved"):
-#		body.get_shoved(global_position, global_rotation, shove_strength)
-#		emit_signal("hit")
+
+func _audio_effect() -> void:
+	_audio.play()
+	# HACK: just use a better track:
+	yield(get_tree().create_timer(0.2), "timeout")
+	_audio.stop()

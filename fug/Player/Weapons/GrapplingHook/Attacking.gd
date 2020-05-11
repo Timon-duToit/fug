@@ -1,6 +1,6 @@
 extends GrapplingHookState
 
-export var max_range : float = 400
+export var max_range : float = 250
 export var attack_time : float = 0.5
 export var attack_curve : Curve
 
@@ -16,6 +16,9 @@ func enter(controller_ : StateMachine) -> void:
 	_attack_animation.reset()
 	_target_position - grappling_hook.get_global_mouse_position()
 	_enforce_max_range()
+
+func process(delta : float) -> void:
+	update_line_renderer()
 
 func physics_process(delta : float) -> void:
 	var done_attacking := _attack_animation.update(delta)
@@ -34,7 +37,7 @@ func on_Parent_body_entered(body: Node) -> void:
 	if body.has_method("get_grappled"):
 		body.get_grappled()
 		grappling_hook.grab_body(body)
-		controller.change_to("Retracting")
+	controller.change_to("Retracting")
 
 func _enforce_max_range() -> void:
 	# moves target position so that it stays in max range.
