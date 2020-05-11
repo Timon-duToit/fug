@@ -24,3 +24,9 @@ func play_animation(animation : String) -> void:
 	
 func set_collider_disabled(state : bool) -> void:
 	_collider.set_deferred("disabled", state)
+
+func get_grappled() -> void:
+	_state_machine.change_to("Grappled")
+
+func release() -> void:
+	_state_machine.change_to("Dead")

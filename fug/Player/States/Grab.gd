@@ -17,7 +17,8 @@ func process(delta : float) -> void:
 		player.play_animation("Idle")
 
 func _on_GrapplingHook_done() -> void:
-	controller.change_to("Default")
+	player.grappling_hook.release()
+	controller.change_to("Shield")
 
 #func unhandled_input(event : InputEvent) -> void:
 #	if event.is_action_pressed("attack"):
