@@ -1,7 +1,7 @@
 extends PlayerState
 
 # For now this mode can only be accessed via attack -> dash
-
+export var shove_strength : float = 400
 export var dash_time : float = 0.5
 
 var _direction : Vector2
@@ -9,10 +9,14 @@ var _direction : Vector2
 var _curve_position : float
 
 
-func _on_Sword_hit():
+func _on_Sword_hit(body : Mob):
+	if not body: return
 	# this will call a change state here via the message
+	# for now just fling away from other position
+	var dir = ((body.global_position - player.position) + Vector2.RIGHT.rotated(player.rotation)).normalized()
+	body.get_shoved(dir, shove_strength)
 	controller.change_to("Limbo")
-	
+
 func enter(controller_ : StateMachine) -> void:
 	# HACK: there should be a better way to do these references
 	player.sword.connect("hit", self, "_on_Sword_hit")

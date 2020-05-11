@@ -10,6 +10,9 @@
 ** Player
 - [-] Give player control over everything
 - [ ] Use Messages to communicate with weapons ?
+** Grappling Hook
+- [ ] Allow grappling during retreat
+  - [ ] Do pouch Throw if hit during retreat
 ** Game structure
 - [ ] Give mobs a way to reference each other
   - [ ] Limit spawning space

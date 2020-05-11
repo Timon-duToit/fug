@@ -31,6 +31,6 @@ func update(delta : float) -> bool:
 	var normalized_time = current_time / _total_time
 	value = _curve.interpolate(normalized_time) * _max_value
 	return abs(normalized_time - 1) < 0.00001
-	
+ 
 func delta_get() -> float:
 	return value - last_value

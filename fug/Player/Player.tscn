@@ -16,7 +16,7 @@
 [ext_resource path="res://Player/Assets/sprPSwordKill_strip16.png" type="Texture" id=14]
 [ext_resource path="res://Player/States/Limbo.gd" type="Script" id=15]
 [ext_resource path="res://Player/States/Grab.gd" type="Script" id=16]
-[ext_resource path="res://Player/Weapons/GrapplingHook.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Player/Weapons/GrapplingHook/GrapplingHook.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Player/States/Shield.gd" type="Script" id=18]
 [ext_resource path="res://Player/States/Mace.gd" type="Script" id=19]
 
@@ -272,8 +272,6 @@ shape = SubResource( 1 )
 
 [node name="GrapplingHook" parent="." instance=ExtResource( 17 )]
 skew = 4.37114e-08
-reaction_curve_domain = 100.0
-max_change_speed = 300.0
 
 [node name="Body" type="Node2D" parent="."]
 
@@ -281,7 +279,7 @@ max_change_speed = 300.0
 skew = 4.37114e-08
 frames = SubResource( 44 )
 animation = "Shove"
-frame = 11
+frame = 8
 playing = true
 
 [node name="Sword" parent="Body" instance=ExtResource( 8 )]
@@ -289,7 +287,6 @@ skew = 4.37114e-08
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 5 )
-DEBUG = true
 
 [node name="Default" type="Node" parent="StateMachine"]
 script = ExtResource( 6 )

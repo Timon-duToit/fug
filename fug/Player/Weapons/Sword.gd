@@ -4,7 +4,8 @@ extends Area2D
 
 class_name Sword
 
-signal hit
+signal hit(body)
+signal done
 
 enum Type {ATTACK, SHOVE}
 
@@ -14,6 +15,7 @@ export var sweep_time : float = 0.1
 
 var _attacking := false
 var _attack_time : float
+# collider state and onhit reaction state
 var _state = Type.ATTACK
 
 onready var _collider_attack := $ColliderAttack
@@ -38,6 +40,7 @@ func stop_attack() -> void:
 		_collider_attack.set_deferred("disabled", true)
 	else:
 		_collider_shove.set_deferred("disabled", true)
+	emit_signal("done")
 
 func shove() -> void:
 	_state = Type.SHOVE
@@ -57,9 +60,10 @@ func _physics_process(delta: float) -> void:
 			_collider_attack.rotation = lerp(0, sweep, _attack_time / sweep_time)
 
 func _on_Sword_body_entered(body: Node) -> void:
-	if _state == Type.ATTACK && body.has_method("hit"):
-		body.hit()
-		emit_signal("hit")
-	elif _state == Type.SHOVE && body.has_method("get_shoved"):
-		body.get_shoved(global_position, global_rotation, shove_strength)
-		emit_signal("hit")
+	emit_signal("hit", body)
+#	if _type == Type.ATTACK && body.has_method("hit"):
+#		body.hit()
+#		emit_signal("hit")
+#	elif _type == Type.SHOVE && body.has_method("get_shoved"):
+#		body.get_shoved(global_position, global_rotation, shove_strength)
+#		emit_signal("hit")

@@ -53,3 +53,8 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 func _notification(what: int) -> void:
 	if state && state.has_method("notification"):
 		state.notification(what)
+
+
+func _on_Parent_body_entered(body: Node) -> void:
+	if state.has_method("on_Parent_body_entered"):
+		state.on_Parent_body_entered(body)

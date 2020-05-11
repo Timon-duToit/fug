@@ -17,7 +17,12 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "GrapplingHook",
 "language": "GDScript",
-"path": "res://Player/Weapons/GrapplingHook.gd"
+"path": "res://Player/Weapons/GrapplingHook/GrapplingHook.gd"
+}, {
+"base": "State",
+"class": "GrapplingHookState",
+"language": "GDScript",
+"path": "res://Player/Weapons/GrapplingHook/GrapplingHookState.gd"
 }, {
 "base": "Node",
 "class": "LevelManager",
@@ -82,6 +87,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AnimatedCurve": "",
 "GrapplingHook": "",
+"GrapplingHookState": "",
 "LevelManager": "",
 "Mob": "",
 "MobState": "",

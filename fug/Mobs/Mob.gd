@@ -3,6 +3,7 @@ extends KinematicBody2D
 class_name Mob
 
 signal death
+signal shoved
 
 onready var _state_machine : StateMachine = $StateMachine
 onready var animator : AnimatedSprite = $AnimatedSprite
@@ -16,7 +17,6 @@ func _ready() -> void:
 func _on_StateMachine_change_state(last_state_name : String, new_state_name : String):
 	if new_state_name == "Dead":
 		emit_signal("death")
-		print("death mob")
 
 func hit() -> void:
 	_die()
@@ -24,9 +24,10 @@ func hit() -> void:
 func _die() -> void:
 	_state_machine.change_to("Dead")
 
-func get_shoved(other_position : Vector2, other_rotation : float, shove_strength : float) -> void:
+func get_shoved(direction : Vector2, shove_strength : float) -> void:
 	_state_machine.change_to("Shoved")
-	_state_machine.state.init_shove(other_position, other_rotation, shove_strength)
+	_state_machine.state.init_shove(direction, shove_strength)
+	emit_signal("shoved")
 	# print("%s %s %s" % [other_position, other_rotation, shove_strength])
 
 func play_animation(animation : String) -> void:
@@ -39,7 +40,7 @@ func get_grappled() -> void:
 	_state_machine.change_to("Grappled")
 
 func release() -> void:
-	_state_machine.change_to("Dead")
+	pass
 
 func is_dead() -> bool:
 	return _state_machine.state.name == "Dead"

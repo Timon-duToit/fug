@@ -6,18 +6,19 @@ export var min_kill_velocity = 200
 
 var _speed : Vector2
 
-func init_shove(other_position : Vector2, other_rotation : float, shove_strength : float) -> void:
+func init_shove(direction : Vector2, shove_strength : float) -> void:
 	# Not the cleanest way to do things but hey.
 	mob.animator.rotate(PI)
 	mob.play_animation("Death")
 	# disable collision with other mobs
-	mob.set_collision_mask_bit(2, 0)
-	mob.set_collision_layer_bit(2, 0)
-	
-	# for now just fling away from other position
-	var dir = ((mob.global_position - other_position) + Vector2.RIGHT.rotated(other_rotation)).normalized()
-	_speed = dir * shove_strength
+	mob.call_deferred("set_collision_mask_bit", 2, 0)
+	mob.call_deferred("set_collision_layer_bit", 2, 0)
+	_speed = direction.normalized() * shove_strength
 	mob.shove_collider.set_deferred("disabled", false)
+
+func leave() -> void:
+	.leave()
+	mob.shove_collider.set_deferred("disabled", true)
 
 func physics_process(delta : float) -> void:
 	var new_velocity = _decrease_velocity(friction * delta)
@@ -27,6 +28,7 @@ func physics_process(delta : float) -> void:
 		_end_shove()
 		return
 	if mob.move_and_collide(delta * _speed):
+		print("END")
 		_end_shove()
 
 func _decrease_velocity(amount : float):
