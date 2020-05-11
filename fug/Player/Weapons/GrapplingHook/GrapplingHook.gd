@@ -56,7 +56,6 @@ func drop_body() -> void:
 	call_deferred("_drop_body")
 	if _grappled_body.has_signal("death"):
 		_grappled_body.disconnect("death", self, "_on_Body_death")
-	print("emitting signal")
 	emit_signal("drop_body")
 	
 		# change collision mask back

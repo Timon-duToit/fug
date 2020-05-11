@@ -33,6 +33,7 @@ var _movement := Vector2()
 var _dash_direction : Vector2
 var _dash_time : float
 var _dash_curve_position : float
+var _dash_dist
 
 # can't dash if this is positive
 var _dash_timeout : float = 0
@@ -54,7 +55,7 @@ func _physics_process(delta : float) -> void:
 		_dash_curve_position = new_curve_position
 		var delta_normalized := new_distance - last_distance
 
-		var has_hit = move_and_collide(_dash_direction * delta_normalized * dash_dist)
+		var has_hit = move_and_collide(_dash_direction * delta_normalized * _dash_dist)
 		if has_hit || new_curve_position == 1:
 			change_state(MOVING)
 
@@ -80,9 +81,10 @@ func body_look_at(point : Vector2) -> void:
 func can_dash_get() -> bool:
 	return _dash_timeout <= 0
 
-func dash(_direction : Vector2, time := dash_time) -> void:
+func dash(_direction : Vector2, time := dash_time, distance := dash_dist) -> void:
 	_dash_direction = _direction
 	_dash_time = time
 	_dash_curve_position = 0
 	_dash_timeout = dash_timeout
+	_dash_dist = distance
 	change_state(DASHING)

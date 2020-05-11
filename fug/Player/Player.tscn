@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Assets/sprPAttackSword_strip7.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Player/Weapons/GrapplingHook/GrapplingHook.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Player/States/Shield.gd" type="Script" id=18]
 [ext_resource path="res://Player/States/Mace.gd" type="Script" id=19]
+[ext_resource path="res://Assets/music/sound2.wav" type="AudioStream" id=20]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.24637
@@ -264,6 +265,7 @@ animations = [ {
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
+dash_timeout = 0.5
 dash_curve = ExtResource( 13 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -279,7 +281,7 @@ skew = 4.37114e-08
 skew = 4.37114e-08
 frames = SubResource( 44 )
 animation = "Shove"
-frame = 9
+frame = 11
 playing = true
 
 [node name="Sword" parent="Body" instance=ExtResource( 8 )]
@@ -287,6 +289,7 @@ skew = 4.37114e-08
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 5 )
+DEBUG = true
 
 [node name="Default" type="Node" parent="StateMachine"]
 script = ExtResource( 6 )
@@ -303,11 +306,21 @@ script = ExtResource( 4 )
 [node name="Shove" type="Node" parent="StateMachine"]
 script = ExtResource( 12 )
 
+[node name="SoundShove" type="AudioStreamPlayer2D" parent="StateMachine/Shove"]
+skew = 4.37114e-08
+stream = ExtResource( 20 )
+volume_db = -23.0
+
 [node name="Limbo" type="Node" parent="StateMachine"]
 script = ExtResource( 15 )
 
 [node name="Grab" type="Node" parent="StateMachine"]
 script = ExtResource( 16 )
+
+[node name="SoundShove" type="AudioStreamPlayer2D" parent="StateMachine/Grab"]
+skew = 4.37114e-08
+stream = ExtResource( 20 )
+volume_db = -29.0
 
 [node name="Shield" type="Node" parent="StateMachine"]
 script = ExtResource( 18 )

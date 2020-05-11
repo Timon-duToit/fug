@@ -110,7 +110,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GameManager="*res://BaseScripts/GameManager.gd"
+GameManager="*res://BaseScripts/GameManager.tscn"
 
 [input]
 

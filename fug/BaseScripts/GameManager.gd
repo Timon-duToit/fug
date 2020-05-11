@@ -1,5 +1,8 @@
 extends Node
 
+export var slowdown_curve : Curve
+export var slowdown_time : float = 0.3
+
 # SINGLETON
 
 # The level mananger will register himself here
@@ -8,8 +11,15 @@ var player : Player setget , get_player
 
 var _last_speed : float = 1
 
-#func _ready():
-#	Engine.time_scale = 0.1
+var _slowdown_animation : AnimatedCurve
+var _doing_animation := false
+
+func _process(delta: float) -> void:
+	if _doing_animation:
+		if Engine.time_scale == 0: return
+		_doing_animation = not _slowdown_animation.update(delta / Engine.time_scale)
+		Engine.time_scale = _slowdown_animation.value
+		
 
 func get_player() -> Player:
 	return level_manager.player
@@ -30,6 +40,14 @@ func _unhandled_input(event):
 				else:
 					_last_speed = Engine.time_scale
 					Engine.time_scale = 0
+
+func slowdown(time := slowdown_time) -> void:
+	_slowdown_animation = AnimatedCurve.new(slowdown_curve, slowdown_time)
+	_doing_animation = true
+	# also do shake
+	var camera := level_manager.player.get_node("CameraFollower/Camera2D")
+	if camera && camera.has_method("shake"):
+		camera.shake(0.3, 17, 8)
 
 func debug_pos(pos : Vector2) -> void:
 	level_manager.debug_node.position = pos

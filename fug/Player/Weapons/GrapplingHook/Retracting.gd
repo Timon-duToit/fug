@@ -43,3 +43,9 @@ func physics_process(delta : float) -> void:
 			controller.change_to("Shield")
 		else:
 			controller.change_to("Idle")
+
+func on_Parent_body_entered(body: Node) -> void:
+	if grappling_hook.has_body(): return
+	if body.has_method("get_grappled"):
+		body.get_grappled()
+		grappling_hook.grab_body(body)

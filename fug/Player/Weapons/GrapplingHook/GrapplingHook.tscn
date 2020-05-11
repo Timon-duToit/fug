@@ -46,6 +46,7 @@ script = ExtResource( 9 )
 [node name="Attacking" type="Node" parent="StateMachine"]
 script = ExtResource( 7 )
 reaction_curve = ExtResource( 2 )
+attack_time = 0.35
 attack_curve = ExtResource( 10 )
 
 [node name="Retracting" type="Node" parent="StateMachine"]
@@ -54,6 +55,7 @@ reaction_curve = ExtResource( 2 )
 retract_curve = ExtResource( 2 )
 retract_time = 0.4
 min_retract_time = 0.4
+nominated_retract_dist = 200.0
 
 [node name="Shield" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )

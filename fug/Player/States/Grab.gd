@@ -1,9 +1,11 @@
 extends MoveState
 
 export var start_delay : float = 0.2
-export var shove_strength : float = 400
+export var shove_strength : float = 650
 
 var _is_attacking := false
+
+onready var _sound_shove = $SoundShove
 
 func enter(controller_ : StateMachine) -> void:
 	.enter(controller_)
@@ -41,3 +43,5 @@ func _on_Sword_hit(body : Mob) -> void:
 	if body == player.grappling_hook._grappled_body:
 		player.grappling_hook.drop_body()
 		body.get_shoved(player.get_global_mouse_position() - body.global_position, shove_strength)
+		GameManager.slowdown()
+		_sound_shove.play()

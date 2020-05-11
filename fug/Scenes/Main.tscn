@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/Background.jpg" type="Texture" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://BaseScripts/Spawnpoint.tscn" type="PackedScene" id=6]
 [ext_resource path="res://icon.png" type="Texture" id=7]
 [ext_resource path="res://Assets/music/music.wav" type="AudioStream" id=8]
+[ext_resource path="res://BaseScripts/CameraShake.gd" type="Script" id=9]
 
 [sub_resource type="SegmentShape2D" id=1]
 a = Vector2( -838.515, -526.202 )
@@ -40,6 +41,7 @@ collision_mask = 5
 current = true
 zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true
+script = ExtResource( 9 )
 
 [node name="Mob" parent="." instance=ExtResource( 4 )]
 position = Vector2( 106.621, -94.0771 )
