@@ -14,7 +14,6 @@ func enter(controller_ : StateMachine) -> void:
 func leave() -> void:
 	.leave()
 	mob.shove_collider.set_deferred("disabled", true)
-	print("left")
 
 func _on_ShoveArea_body_entered(body: Node) -> void:
 	if body != mob && body.has_method("hit"):

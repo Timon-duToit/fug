@@ -44,7 +44,11 @@ func _process(delta : float) -> void:
 
 func _physics_process(delta : float) -> void:
 	# aim body to camera
-	body.rotation = lerp(body.rotation, body_target.angle(), body_rotate_acceleration * delta)
+	var delta_angle = body_target.angle() - body.rotation
+	if abs(delta_angle) > PI:
+		delta_angle = delta_angle - sign(delta_angle) * 2 * PI
+		
+	body.rotation += lerp(0, delta_angle, body_rotate_acceleration * delta)
 	if _state == MOVING:
 		_movement = lerp(_movement, movement_target, acceleration * delta)
 		move_and_slide(_movement)

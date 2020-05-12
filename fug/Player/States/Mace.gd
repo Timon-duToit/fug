@@ -30,7 +30,6 @@ func _on_GrapplingHook_done() -> void:
 
 func unhandled_input(event : InputEvent) -> void:
 	if event.is_action_pressed("attack"):
-		print("attack")
 		_is_attacking = true
 		player.play_animation("Attack")
 		_callback(funcref(player.sword, "attack"), [], start_delay)

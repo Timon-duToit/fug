@@ -12,7 +12,6 @@ func enter(controller_ : StateMachine) -> void:
 	mob.play_animation("Death")
 	# disable collision with other mobs
 	# Don't do deferred otherwise they can collide with mobs in the first frame of movement
-	print("entered")
 	mob.set_collision_layer_bit(2, 0)
 	mob.set_collision_mask_bit(2, 0)
 	mob.set_collision_mask_bit(1, 0)
