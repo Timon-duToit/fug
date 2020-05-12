@@ -17,9 +17,16 @@
 - [ ] Give mobs a way to reference each other
   - [ ] Limit spawning space
 - [ ] Implement wave system (e.g. Mob  / amount dictionary / class)
+- [ ] Add hp.
 ** Game feel
 - [ ] Allow "super shove" on attack -> dash as long as attack has not yet started
 - [ ] Write better screen shake
+- [ ] Longer slow motion that stops when dash is continued
+
+* Ideas
+** Player
+- [ ] Charge shove when in shield mode
+- [ ] Chargable attack
 
 * Game
 ** Horde, Waves

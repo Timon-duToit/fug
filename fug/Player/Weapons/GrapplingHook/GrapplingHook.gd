@@ -15,11 +15,18 @@ var _previous_body_parent : Node
 var _previous_collision_mask : int
 var _previous_collision_layer : int
 
+# this is used rather then checking _grappled_body so that it updates instantly on drop_body() and not on
+# the deferred call
+var _has_body := false
+
 func set_collider_disabled(value : bool) -> void:
 	collider.set_deferred("disabled", value)
 
 func attack() -> void:
 	_state_machine.change_to("Attacking")
+
+func mace() -> void:
+	_state_machine.change_to("Macing")
 
 func _on_Body_death() -> void:
 	# drop body and if shielding change state
@@ -29,6 +36,7 @@ func _on_Body_death() -> void:
 		_state_machine.change_to("Idle")
 
 func grab_body(body : Node) -> void:
+	_has_body = true
 	call_deferred("_grab_body", body)
 	if body.has_signal("death"):
 		body.connect("death", self, "_on_Body_death")
@@ -44,30 +52,16 @@ func _grab_body(body : Node) -> void:
 	body.global_position = glob_pos
 	body.global_rotation = glob_rot
 
-	# change collision mask
-	var body_physics_body := body as PhysicsBody2D
-	if not body_physics_body : return
-	_previous_collision_mask = body_physics_body.collision_mask
-	_previous_collision_layer = body_physics_body.collision_layer
-	body_physics_body.collision_mask = 0
-	body_physics_body.collision_layer = 16
-
 func drop_body() -> void:
+	_has_body = false
 	call_deferred("_drop_body")
 	if _grappled_body.has_signal("death"):
 		_grappled_body.disconnect("death", self, "_on_Body_death")
 	emit_signal("drop_body")
-	
-		# change collision mask back
-	# NOTE: this assumes that the body node type has not changed
-	var body_physics_body := _grappled_body as PhysicsBody2D
-	if not body_physics_body : return
-	body_physics_body.collision_mask = _previous_collision_mask
-	body_physics_body.collision_layer = _previous_collision_layer
-	
+
 func _drop_body() -> void:
 	# changing the parents will call all collisions
-	if not has_body(): return
+	if not _grappled_body: return
 	# HACK: clean this up
 
 	# this makes check if this has grappled somthing return false in case collisons are triggered when dropping
@@ -85,10 +79,4 @@ func _drop_body() -> void:
 
 
 func has_body() -> bool:
-	return _grappled_body != null
-
-#func hide() -> void:
-#	_collider.hide()
-#
-#func show() -> void:
-#	_collider.show()
+	return _has_body

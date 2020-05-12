@@ -1,5 +1,6 @@
 extends Node
 
+export var disable_slowdown := false
 export var slowdown_curve : Curve
 export var slowdown_time : float = 0.3
 
@@ -42,6 +43,7 @@ func _unhandled_input(event):
 					Engine.time_scale = 0
 
 func slowdown(time := slowdown_time) -> void:
+	if disable_slowdown: return
 	_slowdown_animation = AnimatedCurve.new(slowdown_curve, slowdown_time)
 	_doing_animation = true
 	# also do shake

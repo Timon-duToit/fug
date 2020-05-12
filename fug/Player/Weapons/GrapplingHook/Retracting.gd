@@ -15,7 +15,8 @@ func enter(controller_ : StateMachine) -> void:
 	.enter(controller_)
 	_target_position = grappling_hook.collider.global_position
 	
-	if grappling_hook.has_body():
+	# HACK: this might not get called
+	if grappling_hook._grappled_body:
 		_body_relative_start_position = grappling_hook._grappled_body.position
 	var _retract_time = retract_time * (_target_position - grappling_hook.global_position).length() / nominated_retract_dist
 	_retract_time = max(min_retract_time, _retract_time)
@@ -34,7 +35,7 @@ func physics_process(delta : float) -> void:
 	grappling_hook.collider.position = Vector2.RIGHT * hook_to_target.length() * normalized_position + grappling_hook.idle_position.position
 	grappling_hook.rotation = hook_to_target.angle()
 
-	if grappling_hook.has_body():
+	if grappling_hook._grappled_body:
 		grappling_hook._grappled_body.position = _body_relative_start_position * _retract_animation.value
 	
 	if done:

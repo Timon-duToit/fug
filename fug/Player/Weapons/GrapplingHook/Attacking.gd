@@ -39,6 +39,7 @@ func on_Parent_body_entered(body: Node) -> void:
 		grappling_hook.grab_body(body)
 	controller.change_to("Retracting")
 
+# TODO: move to some sort of common state with Mace
 func _enforce_max_range() -> void:
 	# moves target position so that it stays in max range.
 	# Might be weird while dashing and thuse need to be replaced by something different.

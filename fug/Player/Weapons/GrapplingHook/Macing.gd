@@ -1,2 +1,57 @@
 extends GrapplingHookState
 
+export var distance_curve : Curve
+export var angle_curve : Curve
+
+export var max_range : float = 100
+export var attack_time : float = 0.6
+export var attack_angle : float = PI / 8
+
+var _target_position : Vector2
+
+onready var _distance_animation := AnimatedCurve.new(distance_curve, attack_time)
+onready var _angle_animation := AnimatedCurve.new(angle_curve, attack_time, attack_angle)
+
+func enter(controller_ : StateMachine) -> void:
+	.enter(controller_)
+	_distance_animation.reset()
+	_angle_animation.reset()
+	_target_position = grappling_hook.get_global_mouse_position()
+	_enforce_max_range()
+	
+	if grappling_hook._grappled_body && grappling_hook._grappled_body.has_method("start_mace"):
+		grappling_hook._grappled_body.start_mace()
+
+func leave() -> void:
+	.leave()
+	if grappling_hook._grappled_body && grappling_hook._grappled_body.has_method("stop_mace"):
+		grappling_hook._grappled_body.stop_mace()
+
+func physics_process(delta : float) -> void:
+	var done := _distance_animation.update(delta)
+	_angle_animation.update(delta)
+	
+	_target_position = update_target_position(delta, _target_position)
+	_enforce_max_range()
+	# TODO: include the grappling hook initial position?
+	var hook_to_target = _target_position - grappling_hook.global_position
+	hook_to_target *= _distance_animation.value
+	grappling_hook.collider.position = Vector2.RIGHT * hook_to_target.length() + grappling_hook.idle_position.position
+	grappling_hook.rotation = hook_to_target.angle() + _angle_animation.value
+	
+	update_line_renderer()
+	
+	if done:
+		grappling_hook.emit_signal("done")
+		if grappling_hook.has_body():
+			controller.change_to("Shield")
+		else:
+			controller.change_to("Idle")
+
+# TODO: move to some sort of common state with attack
+func _enforce_max_range() -> void:
+	# moves target position so that it stays in max range.
+	# Might be weird while dashing and thuse need to be replaced by something different.
+	var hook_to_target := _target_position - grappling_hook.global_position
+	if hook_to_target.length() > max_range:
+		_target_position = hook_to_target.normalized() * max_range + grappling_hook.global_position
