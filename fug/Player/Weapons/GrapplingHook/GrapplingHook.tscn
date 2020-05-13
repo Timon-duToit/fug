@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Player/Weapons/GrapplingHook/GrapplingHook.gd" type="Script" id=1]
 [ext_resource path="res://Player/Weapons/GrapplingHook/RetractCurve.tres" type="Curve" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=11]
 [ext_resource path="res://Player/Weapons/Assets/Tentacle.png" type="Texture" id=12]
 [ext_resource path="res://Player/Weapons/GrapplingHook/ReactionCurve.tres" type="Curve" id=13]
+[ext_resource path="res://Player/Weapons/GrapplingHook/GrapplingHookShader.tres" type="Material" id=14]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.40735
@@ -42,7 +43,9 @@ skew = 4.37114e-08
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Area"]
+material = ExtResource( 14 )
 rotation = -1.5708
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 4 )
 
 [node name="StateMachine" type="Node" parent="."]
@@ -79,8 +82,9 @@ visible = false
 texture = ExtResource( 11 )
 
 [node name="Line2D" type="Line2D" parent="."]
-position = Vector2( 0.829258, -0.644979 )
-points = PoolVector2Array( 0, 0, 20, 0 )
+material = ExtResource( 14 )
+points = PoolVector2Array( 0, 0, 100, 0.04 )
+width = 15.0
 default_color = Color( 1, 1, 1, 1 )
 texture = ExtResource( 12 )
 texture_mode = 1
