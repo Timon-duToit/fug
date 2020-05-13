@@ -12,7 +12,6 @@
 [ext_resource path="res://Player/Assets/sprPBackBlunt_strip5.png" type="Texture" id=10]
 [ext_resource path="res://Player/Assets/sprPKneel_strip5.png" type="Texture" id=11]
 [ext_resource path="res://Player/States/Shove.gd" type="Script" id=12]
-[ext_resource path="res://Player/DashCurve.tres" type="Curve" id=13]
 [ext_resource path="res://Player/Assets/sprPSwordKill_strip16.png" type="Texture" id=14]
 [ext_resource path="res://Player/States/Limbo.gd" type="Script" id=15]
 [ext_resource path="res://Player/States/Grab.gd" type="Script" id=16]
@@ -20,6 +19,7 @@
 [ext_resource path="res://Player/States/Shield.gd" type="Script" id=18]
 [ext_resource path="res://Player/States/Mace.gd" type="Script" id=19]
 [ext_resource path="res://Assets/music/sound2.wav" type="AudioStream" id=20]
+[ext_resource path="res://Player/PlayerMovementController.gd" type="Script" id=21]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.24637
@@ -265,8 +265,6 @@ animations = [ {
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
-dash_timeout = 0.5
-dash_curve = ExtResource( 13 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.166084, 0.166084 )
@@ -281,53 +279,56 @@ skew = 4.37114e-08
 skew = 4.37114e-08
 frames = SubResource( 44 )
 animation = "Shove"
-frame = 14
+frame = 4
 playing = true
 
 [node name="Sword" parent="Body" instance=ExtResource( 8 )]
 skew = 4.37114e-08
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="SMGrapplingHook" type="Node" parent="."]
 script = ExtResource( 5 )
 
-[node name="Default" type="Node" parent="StateMachine"]
+[node name="Default" type="Node" parent="SMGrapplingHook"]
 script = ExtResource( 6 )
 
-[node name="Melee" type="Node" parent="StateMachine"]
+[node name="Melee" type="Node" parent="SMGrapplingHook"]
 script = ExtResource( 7 )
 
-[node name="Death" type="Node" parent="StateMachine"]
+[node name="Death" type="Node" parent="SMGrapplingHook"]
 script = ExtResource( 9 )
 
-[node name="Dash" type="Node" parent="StateMachine"]
+[node name="Dash" type="Node" parent="SMGrapplingHook"]
 script = ExtResource( 4 )
 
-[node name="Shove" type="Node" parent="StateMachine"]
+[node name="Shove" type="Node" parent="SMGrapplingHook"]
 script = ExtResource( 12 )
 
-[node name="SoundShove" type="AudioStreamPlayer2D" parent="StateMachine/Shove"]
+[node name="SoundShove" type="AudioStreamPlayer2D" parent="SMGrapplingHook/Shove"]
 skew = 4.37114e-08
 stream = ExtResource( 20 )
 volume_db = -23.0
 
-[node name="Limbo" type="Node" parent="StateMachine"]
+[node name="Limbo" type="Node" parent="SMGrapplingHook"]
 script = ExtResource( 15 )
 
-[node name="Grab" type="Node" parent="StateMachine"]
+[node name="Grab" type="Node" parent="SMGrapplingHook"]
 script = ExtResource( 16 )
 
-[node name="SoundShove" type="AudioStreamPlayer2D" parent="StateMachine/Grab"]
+[node name="SoundShove" type="AudioStreamPlayer2D" parent="SMGrapplingHook/Grab"]
 skew = 4.37114e-08
 stream = ExtResource( 20 )
 volume_db = -29.0
 
-[node name="Shield" type="Node" parent="StateMachine"]
+[node name="Shield" type="Node" parent="SMGrapplingHook"]
 script = ExtResource( 18 )
 
-[node name="Mace" type="Node" parent="StateMachine"]
+[node name="Mace" type="Node" parent="SMGrapplingHook"]
 script = ExtResource( 19 )
 
-[node name="SoundShove" type="AudioStreamPlayer2D" parent="StateMachine/Mace"]
+[node name="SoundShove" type="AudioStreamPlayer2D" parent="SMGrapplingHook/Mace"]
 skew = 4.37114e-08
 stream = ExtResource( 20 )
 volume_db = -29.0
+
+[node name="PlayerMovementController" type="Node" parent="."]
+script = ExtResource( 21 )

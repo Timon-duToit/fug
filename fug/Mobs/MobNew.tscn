@@ -1,22 +1,17 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=35 format=2]
 
-[ext_resource path="res://Mobs/Mob.gd" type="Script" id=1]
+[ext_resource path="res://Mobs/Punch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Mobs/Assets/sprBoss1Attack_strip5.png" type="Texture" id=2]
 [ext_resource path="res://Mobs/Assets/sprBoss1GetUp_strip8.png" type="Texture" id=3]
 [ext_resource path="res://Mobs/Assets/sprBoss1Dead.png" type="Texture" id=4]
 [ext_resource path="res://Mobs/Assets/sprBoss1Walk_strip8.png" type="Texture" id=5]
-[ext_resource path="res://BaseScripts/StateMachine.gd" type="Script" id=6]
-[ext_resource path="res://BaseScripts/Cleanup.gd" type="Script" id=7]
-[ext_resource path="res://Mobs/States/Default.gd" type="Script" id=8]
-[ext_resource path="res://Mobs/States/Dead.gd" type="Script" id=9]
-[ext_resource path="res://Mobs/States/Target.gd" type="Script" id=10]
-[ext_resource path="res://Mobs/States/Attack.gd" type="Script" id=11]
-[ext_resource path="res://Mobs/Punch.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Mobs/States/Shoved.gd" type="Script" id=13]
-[ext_resource path="res://Mobs/States/Grappled.gd" type="Script" id=14]
-[ext_resource path="res://Assets/music/death.wav" type="AudioStream" id=15]
-[ext_resource path="res://Mobs/States/Maced.gd" type="Script" id=16]
-[ext_resource path="res://Assets/music/BiteCreakBloodJuicy_002.wav" type="AudioStream" id=17]
+[ext_resource path="res://BaseScripts/Weapon.gd" type="Script" id=6]
+[ext_resource path="res://Assets/music/death.wav" type="AudioStream" id=7]
+[ext_resource path="res://Assets/music/BiteCreakBloodJuicy_002.wav" type="AudioStream" id=8]
+[ext_resource path="res://Mobs/MobNew.gd" type="Script" id=9]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 7.41665
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
@@ -151,25 +146,22 @@ animations = [ {
 "speed": 20.0
 } ]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 7.41665
-
 [sub_resource type="CircleShape2D" id=25]
 radius = 16.8732
 
-[node name="Mob" type="KinematicBody2D"]
+[node name="MobNew" type="KinematicBody2D"]
 collision_layer = 4
-collision_mask = 23
-script = ExtResource( 1 )
+collision_mask = 7
+script = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.996498, 0.664333 )
+shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 z_index = -10
 frames = SubResource( 24 )
 animation = "Idle"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.996498, 0.664333 )
-shape = SubResource( 1 )
 
 [node name="ShoveArea" type="Area2D" parent="."]
 skew = 4.37114e-08
@@ -181,41 +173,16 @@ position = Vector2( -0.166084, 0 )
 shape = SubResource( 25 )
 disabled = true
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="Punch" type="Area2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 8.96852, 0.498246 )
+collision_layer = 0
+collision_mask = 2
 script = ExtResource( 6 )
 
-[node name="Default" type="Node" parent="StateMachine"]
-script = ExtResource( 8 )
-
-[node name="Target" type="Node" parent="StateMachine"]
-script = ExtResource( 10 )
-
-[node name="Attack" type="Node" parent="StateMachine"]
-script = ExtResource( 11 )
-
-[node name="Dead" type="Node" parent="StateMachine"]
-script = ExtResource( 9 )
-
-[node name="Shoved" type="Node" parent="StateMachine"]
-script = ExtResource( 13 )
-
-[node name="Grappled" type="Node" parent="StateMachine"]
-script = ExtResource( 14 )
-
-[node name="Maced" type="Node" parent="StateMachine"]
-script = ExtResource( 16 )
-
-[node name="Cleanup" type="Node" parent="."]
-script = ExtResource( 7 )
-
-[node name="Punch" parent="." instance=ExtResource( 12 )]
-position = Vector2( 8.96852, 0.498246 )
-
 [node name="Audio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 15 )
+stream = ExtResource( 7 )
 volume_db = -25.0
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 17 )
+stream = ExtResource( 8 )
 volume_db = -20.534
-[connection signal="body_entered" from="ShoveArea" to="StateMachine/Shoved" method="_on_ShoveArea_body_entered"]

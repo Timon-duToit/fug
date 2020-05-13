@@ -4,6 +4,10 @@ class_name Spawnpoint
 
 export (PackedScene) var mob_scene
 export var is_active := true
+export var spawn_time : float = 5
+
+func _ready() -> void:
+	$Timer.wait_time = spawn_time
 
 func _on_Timer_timeout() -> void:
 	if is_active:

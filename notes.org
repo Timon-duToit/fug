@@ -27,6 +27,10 @@
 ** Player
 - [ ] Charge shove when in shield mode
 - [ ] Chargable attack
+- [ ] Heaps of Corpses
+  1. On Death Corpses draw additively (a simplified texture) to corpse RenderTexture (With a pixel of 1)
+  2. RenderTexture is blurred
+  3. Render texture is converted to Objects by doing some kind of flood fill
 
 * Game
 ** Horde, Waves
