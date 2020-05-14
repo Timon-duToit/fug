@@ -3,6 +3,7 @@
 * 2do
 ** Bugs
 - [-] Statemachine Should control sword
+- [ ] Make Grappling hook target not move further away during retreat
 ** Statemachine
 - [-] General dependency cleanup
 - [-] Make grappling Hook drop enemy on death and notify state to change
@@ -22,6 +23,13 @@
 - [ ] Allow "super shove" on attack -> dash as long as attack has not yet started
 - [ ] Write better screen shake
 - [ ] Longer slow motion that stops when dash is continued
+- [ ] Allow set direction after dash if no button is pressed before
+
+
+* Game Description
+** Physics
+*** Layers
+| Layer | Type |
 
 * Ideas
 ** Player

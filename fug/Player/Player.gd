@@ -7,7 +7,7 @@ onready var body := $Body
 onready var sword := $Body/Sword
 onready var animator := $Body/Animator
 onready var grappling_hook : GrapplingHook = $GrapplingHook
-onready var movement_controller := $PlayerMovementController
+onready var movement_controller : PlayerDefaultMC = $PlayerMovementController
 
 onready var _collider := $CollisionShape2D
 

@@ -6,7 +6,7 @@ signal state_change(new_state)
 
 export var speed : float = 150
 export var acceleration : float = 20
-export var dash_timeout : float = 1
+export var dash_timeout : float = 0.5
 export var body_rotate_acceleration : float = 20
 
 export var dash_dist : float = 120
@@ -66,6 +66,9 @@ func _physics_process(delta : float) -> void:
 func run_direction(direction : Vector2) -> void:
 	movement_target = direction.normalized() * speed
 
+func get_speed() -> float:
+	return _movement.length()
+
 func stop() -> void:
 	change_state(IDLE)
 
@@ -79,10 +82,10 @@ func body_look_at(point : Vector2) -> void:
 func can_dash_get() -> bool:
 	return _dash_timeout <= 0
 
-func dash(_direction : Vector2, time := dash_time, distance := dash_dist) -> void:
+func dash(_direction : Vector2, time := dash_time, dist_multiplier : float = 1) -> void:
 	_dash_direction = _direction
 	_dash_time = time
 	_dash_curve_position = 0
 	_dash_timeout = dash_timeout
-	_dash_dist = distance
+	_dash_dist = dash_dist * dist_multiplier
 	change_state(DASHING)

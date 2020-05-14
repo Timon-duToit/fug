@@ -20,6 +20,5 @@ func _handle_inputs() -> void:
 		_movement_target += Vector2.RIGHT
 	if Input.is_action_pressed("left"):
 		_movement_target += Vector2.LEFT
-	_movement_target = _movement_target.normalized() * player.speed
-	player.movement_target = _movement_target
-	player.body_look_at(player.get_global_mouse_position())
+	player.movement_controller.run_direction(_movement_target)
+	player.movement_controller.body_look_at(player.get_global_mouse_position())

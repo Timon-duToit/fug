@@ -34,9 +34,9 @@ func physics_process(delta : float) -> void:
 	# return done_attacking
 
 func on_Parent_body_entered(body: Node) -> void:
-	if body.has_method("get_grappled"):
-		body.get_grappled()
-		grappling_hook.grab_body(body)
+	if body is Actor:
+		body.be_grappled()
+		grappling_hook.grab_actor(body)
 	controller.change_to("Retracting")
 
 # TODO: move to some sort of common state with Mace

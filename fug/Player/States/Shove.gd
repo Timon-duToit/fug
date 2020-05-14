@@ -16,37 +16,26 @@ func enter(controller_ : StateMachine) -> void:
 	player.sword.shove()
 	.enter(controller_)
 	player.play_animation("Shove")
-#	var direction := Vector2()
-#	if Input.is_action_pressed("up"):
-#		direction += Vector2.UP
-#	if Input.is_action_pressed("down"):
-#		direction += Vector2.DOWN
-#	if Input.is_action_pressed("right"):
-#		direction += Vector2.RIGHT
-#	if Input.is_action_pressed("left"):
-#		direction += Vector2.LEFT
-#	direction = direction.normalized()
-
 	var direction := (player.get_global_mouse_position() - player.global_position).normalized()
 	
 	if controller.last_state == "Dash" or controller.last_state == "Limbo":
-		player.dash(direction, dash_time, dash_chain_multiplier * player.dash_dist)
+		player.movement_controller.dash(direction, dash_time, dash_chain_multiplier)
 	else:
-		player.dash(direction, dash_time)
-	player.body_target = direction
-	player.connect("state_change", self, "on_Player_state_change")
+		player.movement_controller.dash(direction, dash_time)
+	player.movement_controller.body_target = direction
+	player.movement_controller.connect("state_change", self, "on_Player_state_change")
 
 func leave() -> void:
 	.leave()
 	# disconnect before changing player state
-	player.disconnect("state_change", self, "on_Player_state_change")
-	player.change_state(Player.MOVING)
+	player.movement_controller.disconnect("state_change", self, "on_Player_state_change")
+	player.movement_controller.change_state(PlayerDefaultMC.MOVING)
 	player.sword.stop_attack()
 	player.sword.disconnect("hit", self, "_on_Sword_hit")
 	
 func on_Player_state_change(new_state) -> void:
 	# player has ended the dash himself
-	if new_state != Player.DASHING:
+	if new_state != PlayerDefaultMC.DASHING:
 		controller.change_to("Default")
 
 func _on_Sword_hit(body : Mob):

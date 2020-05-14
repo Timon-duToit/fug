@@ -16,17 +16,17 @@ func enter(controller_ : StateMachine) -> void:
 	if Input.is_action_pressed("left"):
 		_direction += Vector2.LEFT
 	_direction = _direction.normalized()
-	player.dash(_direction)
-	player.connect("state_change", self, "on_Player_state_change")
+	player.movement_controller.dash(_direction)
+	player.movement_controller.connect("state_change", self, "on_Player_state_change")
 
 func leave() -> void:
 	.leave()
-	player.disconnect("state_change", self, "on_Player_state_change")
+	player.movement_controller.disconnect("state_change", self, "on_Player_state_change")
 
 func unhandled_input(event : InputEvent) -> void:
 	if event.is_action_pressed("attack"):
 		controller.change_to("Shove")
 
 func on_Player_state_change(new_state) -> void:
-	if new_state != Player.DASHING:
+	if new_state != PlayerDefaultMC.DASHING:
 		controller.change_to("Default")

@@ -20,7 +20,7 @@ func leave() -> void:
 func process(delta : float) -> void:
 	.process(delta)
 	if _is_attacking : return
-	if player._movement.length() > 5:
+	if player.movement_controller.get_speed() > 5:
 		player.play_animation("Walking")
 	else:
 		player.play_animation("Idle")

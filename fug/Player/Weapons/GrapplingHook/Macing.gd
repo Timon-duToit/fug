@@ -19,13 +19,13 @@ func enter(controller_ : StateMachine) -> void:
 	_target_position = grappling_hook.get_global_mouse_position()
 	_enforce_max_range()
 	
-	if grappling_hook._grappled_body && grappling_hook._grappled_body.has_method("start_mace"):
-		grappling_hook._grappled_body.start_mace()
+	if grappling_hook.has_actor:
+		grappling_hook.grappled_actor.be_weapon()
 
 func leave() -> void:
 	.leave()
-	if grappling_hook._grappled_body && grappling_hook._grappled_body.has_method("stop_mace"):
-		grappling_hook._grappled_body.stop_mace()
+	if grappling_hook.has_actor:
+		grappling_hook.grappled_actor.be_grappled()
 
 func physics_process(delta : float) -> void:
 	var done := _distance_animation.update(delta)
@@ -43,7 +43,7 @@ func physics_process(delta : float) -> void:
 	
 	if done:
 		grappling_hook.emit_signal("done")
-		if grappling_hook.has_body():
+		if grappling_hook.has_actor:
 			controller.change_to("Shield")
 		else:
 			controller.change_to("Idle")

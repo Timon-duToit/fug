@@ -176,10 +176,9 @@ alt_attack={
 
 [layer_names]
 
-2d_physics/layer_1="Objects"
+2d_physics/layer_1="Actors"
 2d_physics/layer_2="Player"
-2d_physics/layer_3="Enemies"
-2d_physics/layer_5="Only CE"
+2d_physics/layer_3="Walls"
 
 [rendering]
 

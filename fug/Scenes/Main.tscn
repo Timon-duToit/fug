@@ -35,7 +35,6 @@ extents = Vector2( 46.5109, 47.1913 )
 script = ExtResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-collision_mask = 5
 
 [node name="CameraFollower" parent="Player" instance=ExtResource( 3 )]
 
@@ -174,6 +173,8 @@ position = Vector2( -46.2134, -35.2102 )
 
 [node name="MobNew" parent="." instance=ExtResource( 11 )]
 position = Vector2( 36.9707, -40.0516 )
+collision_layer = 1
+collision_mask = 0
 
 [editable path="Spawnpoints/Spawnpoint"]
 
