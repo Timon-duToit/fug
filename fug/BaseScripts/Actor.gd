@@ -46,8 +46,8 @@ func be_ungrappled() -> void:
 func _set_grappled_physics() -> void:
 	# don't collider with player
 	set_collision_layer_bit(1, false)
-	# move to player layer
-	collision_layer = 2
+	# move to grappled layer
+	collision_layer = 8
 
 func _set_normal_physics() -> void:
 	collision_layer = _default_collision_layer

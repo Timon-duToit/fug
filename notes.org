@@ -24,6 +24,7 @@
 - [ ] Write better screen shake
 - [ ] Longer slow motion that stops when dash is continued
 - [ ] Allow set direction after dash if no button is pressed before
+- [ ] Buffer inputs
 
 
 * Game Description

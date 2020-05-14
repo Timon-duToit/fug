@@ -4,7 +4,7 @@ class_name Player
 
 onready var state_machine := $SMGrapplingHook
 onready var body := $Body
-onready var sword := $Body/Sword
+onready var weapon : PlayerWeapon = $Body/Sword
 onready var animator := $Body/Animator
 onready var grappling_hook : GrapplingHook = $GrapplingHook
 onready var movement_controller : PlayerDefaultMC = $PlayerMovementController

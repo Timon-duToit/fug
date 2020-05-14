@@ -14,7 +14,7 @@ func enter(controller_: StateMachine) -> void:
 	
 	# not sure it this way of doing things is "threadsave"
 	_can_attack = false
-	_callback(funcref(self, "_allow_attack"), [], attack_timeout)
+	_callback(funcref(self, "_allow_attack"), attack_timeout)
 
 func _allow_attack() -> void:
 	_can_attack = true

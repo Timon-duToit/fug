@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/States/MoveState.gd"
 }, {
+"base": "PlayerWeapon",
+"class": "NewSword",
+"language": "GDScript",
+"path": "res://Player/Weapons/Sword/NewSword.gd"
+}, {
 "base": "Actor",
 "class": "Player",
 "language": "GDScript",
@@ -74,7 +79,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/States/PlayerState.gd"
 }, {
-"base": "Node",
+"base": "Node2D",
 "class": "PlayerWeapon",
 "language": "GDScript",
 "path": "res://Player/Weapons/PlayerWeapon.gd"
@@ -114,6 +119,7 @@ _global_script_class_icons={
 "MobState": "",
 "MobStateGrappled": "",
 "MoveState": "",
+"NewSword": "",
 "Player": "",
 "PlayerDefault": "",
 "PlayerDefaultMC": "",
@@ -179,6 +185,7 @@ alt_attack={
 2d_physics/layer_1="Actors"
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Walls"
+2d_physics/layer_4="Grappled"
 
 [rendering]
 

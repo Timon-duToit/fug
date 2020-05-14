@@ -13,7 +13,7 @@ func enter(controller_ : StateMachine) -> void:
 	if anim_time <= attack_delay:
 		print("ERROR: won't attack if animation time is less then attack_delay")
 	
-	_callback(funcref(_weapon, "attack"), [], attack_delay)
-	_callback(funcref(controller, "change_to"), ["Target"], anim_time)
+	_callback(funcref(_weapon, "attack"), attack_delay)
+	_callback(funcref(controller, "change_to"), anim_time, ["Target"])
 	# yield(get_tree().create_timer(anim_time), "timeout")
 	# controller.change_to("Target")

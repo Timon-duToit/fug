@@ -12,8 +12,7 @@ onready var _sound_shove := $SoundShove
 
 func enter(controller_ : StateMachine) -> void:
 	# HACK: there should be a better way to do these references
-	player.sword.connect("hit", self, "_on_Sword_hit")
-	player.sword.shove()
+	player.weapon.dash_attack(funcref(self, "_on_Sword_hit"))
 	.enter(controller_)
 	player.play_animation("Shove")
 	var direction := (player.get_global_mouse_position() - player.global_position).normalized()
@@ -30,19 +29,17 @@ func leave() -> void:
 	# disconnect before changing player state
 	player.movement_controller.disconnect("state_change", self, "on_Player_state_change")
 	player.movement_controller.change_state(PlayerDefaultMC.MOVING)
-	player.sword.stop_attack()
-	player.sword.disconnect("hit", self, "_on_Sword_hit")
+	player.weapon.interrupt_attack()
 	
 func on_Player_state_change(new_state) -> void:
 	# player has ended the dash himself
 	if new_state != PlayerDefaultMC.DASHING:
 		controller.change_to("Default")
 
-func _on_Sword_hit(body : Mob):
-	if not body: return
+func _on_Sword_hit(body : Actor):
 	# this will call a change state here via the message
 	# for now just fling away from other position
 	var dir = ((body.global_position - player.position) + Vector2.RIGHT.rotated(player.rotation)).normalized()
-	body.get_shoved(dir, shove_strength)
+	body.get_shoved(dir * shove_strength)
 	controller.change_to("Limbo")
 	_sound_shove.play()

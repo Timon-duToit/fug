@@ -4,7 +4,7 @@ export var limbo_time : float = 0.4
 
 func enter(controller_ : StateMachine) -> void:
 	.enter(controller_)
-	_callback(funcref(controller, "change_to"), ["Default"], limbo_time)
+	_callback(funcref(controller, "change_to"), limbo_time, ["Default"])
 	GameManager.slowdown()
 	
 func unhandled_input(event : InputEvent) -> void:

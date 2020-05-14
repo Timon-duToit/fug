@@ -30,7 +30,7 @@ static func get_animation_time(animator : AnimatedSprite, animation : String) ->
 			/ frames.get_animation_speed(animation) \
 			/ animator.speed_scale
 
-func _callback(callback : FuncRef, arguments : Array, time : float) -> void:
+func _callback(callback : FuncRef, time : float, arguments : Array=[]) -> void:
 	# adds timed callback function to this state that will be revoked by
 	# enter()
 	self._callbacks.append(Callback.new(time, callback, arguments))
