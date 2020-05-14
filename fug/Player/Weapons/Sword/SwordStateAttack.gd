@@ -35,6 +35,8 @@ func physics_process(delta: float) -> void:
 		controller.change_to("Default")
 
 func _on_HitArea_body_entered(body : Actor) -> void:
+	# HACK: avoid double hit if the collision layer is changed during physics
+	if not body.collision_layer: return
 	if not body: return
 	_sword.on_hit(body)
 

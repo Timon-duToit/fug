@@ -19,6 +19,26 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BaseScripts/AnimatedCurve.gd"
 }, {
+"base": "Mob",
+"class": "BasicMob",
+"language": "GDScript",
+"path": "res://Mobs/BasicMobSM/BasicMobSM.gd"
+}, {
+"base": "Node",
+"class": "BasicMobMC",
+"language": "GDScript",
+"path": "res://Mobs/BasicMobSM/BasicMobMC.gd"
+}, {
+"base": "State",
+"class": "BasicMobStateDeath",
+"language": "GDScript",
+"path": "res://Mobs/BasicMobSM/BasicMobStateDeath.gd"
+}, {
+"base": "MobWeapon",
+"class": "BodyWeapon",
+"language": "GDScript",
+"path": "res://Mobs/MobWeapons/BodyWeapon.gd"
+}, {
 "base": "Area2D",
 "class": "GrapplingHook",
 "language": "GDScript",
@@ -34,10 +54,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BaseScripts/LevelManager.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "Actor",
 "class": "Mob",
 "language": "GDScript",
 "path": "res://Mobs/Mob.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "MobOld",
+"language": "GDScript",
+"path": "res://Mobs/MobOld.gd"
 }, {
 "base": "State",
 "class": "MobState",
@@ -48,6 +73,11 @@ _global_script_classes=[ {
 "class": "MobStateGrappled",
 "language": "GDScript",
 "path": "res://Mobs/States/Grappled.gd"
+}, {
+"base": "Node2D",
+"class": "MobWeapon",
+"language": "GDScript",
+"path": "res://Mobs/MobWeapons/MobWeapon.gd"
 }, {
 "base": "PlayerState",
 "class": "MoveState",
@@ -99,6 +129,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Weapons/Sword/Sword.gd"
 }, {
+"base": "Reference",
+"class": "Util",
+"language": "GDScript",
+"path": "res://BaseScripts/Util.gd"
+}, {
 "base": "Area2D",
 "class": "Weapon",
 "language": "GDScript",
@@ -107,12 +142,18 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Actor": "",
 "AnimatedCurve": "",
+"BasicMob": "",
+"BasicMobMC": "",
+"BasicMobStateDeath": "",
+"BodyWeapon": "",
 "GrapplingHook": "",
 "GrapplingHookState": "",
 "LevelManager": "",
 "Mob": "",
+"MobOld": "",
 "MobState": "",
 "MobStateGrappled": "",
+"MobWeapon": "",
 "MoveState": "",
 "Player": "",
 "PlayerDefault": "",
@@ -123,6 +164,7 @@ _global_script_class_icons={
 "State": "",
 "StateMachine": "",
 "Sword": "",
+"Util": "",
 "Weapon": ""
 }
 

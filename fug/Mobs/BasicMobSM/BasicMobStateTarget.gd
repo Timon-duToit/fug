@@ -1,0 +1,39 @@
+extends State
+
+export var speed : float = 150
+export var attack_timeout : float = 0.75
+export var attack_distance : float = 20
+export var untarget_distance : float = 350
+onready var _mob : BasicMob = owner as BasicMob
+
+var _can_attack = false
+
+func enter(controller_: StateMachine) -> void:
+	.enter(controller_)
+	_mob.play_animation("Walk")
+	_can_attack = false
+	_callback(funcref(self, "_allow_attack"), attack_timeout)
+
+func _allow_attack() -> void:
+	_can_attack = true
+
+func process(delta : float) -> void:
+	.process(delta)
+	var player := GameManager.player
+	var delta_player := GameManager.player.position - _mob.position
+	
+	_mob.movement_controller.speed_target = delta_player.normalized() * speed
+	
+	if _mob.movement_controller.get_speed() > 5:
+		_mob.play_animation("Walk")
+	else:
+		_mob.play_animation("Idle")
+	
+	var dist = delta_player.length()
+	
+	if dist < attack_distance:
+		if _can_attack:
+			controller.change_to("Attack")
+	# TODO: replace with collision check
+	elif dist > untarget_distance:
+		controller.change_to("Walk")

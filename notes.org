@@ -14,11 +14,14 @@
 ** Grappling Hook
 - [-] Allow grappling during retreat
   - [-] Do pouch Throw if hit during retreat
+- [ ] Update hook position according to mob.
 ** Game structure
 - [ ] Give mobs a way to reference each other
   - [ ] Limit spawning space
 - [ ] Implement wave system (e.g. Mob  / amount dictionary / class)
 - [ ] Add hp.
+- [ ] Mob weapon add ignore actor list so that it can target other stuff then player
+- [ ] MobBody add player to possible collisions
 ** Game feel
 - [ ] Allow "super shove" on attack -> dash as long as attack has not yet started
 - [ ] Write better screen shake

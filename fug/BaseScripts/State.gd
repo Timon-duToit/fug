@@ -22,14 +22,6 @@ func process(delta : float) -> void:
 	for c in to_remove:
 		_callbacks.erase(c)
 
-# Utility funcitons
-static func get_animation_time(animator : AnimatedSprite, animation : String) -> float:
-	# Returns the total animation time for the currently selected animation
-	var frames = animator.frames
-	return  frames.get_frame_count(animation) \
-			/ frames.get_animation_speed(animation) \
-			/ animator.speed_scale
-
 func _callback(callback : FuncRef, time : float, arguments : Array=[]) -> void:
 	# adds timed callback function to this state that will be revoked by
 	# enter()

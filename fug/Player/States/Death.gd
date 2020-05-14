@@ -3,4 +3,4 @@ extends PlayerState
 func enter(controller_ : StateMachine) -> void:
 	.enter(controller_)
 	player.play_animation("Death")
-	player.die()
+	player.movement_controller.movement_target = Vector2.ZERO

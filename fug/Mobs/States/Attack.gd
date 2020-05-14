@@ -9,7 +9,7 @@ func enter(controller_ : StateMachine) -> void:
 	mob.play_animation("Attack")
 	# _weapon.attack()
 	
-	var anim_time = get_animation_time(mob.animator, "Attack")
+	var anim_time = Util.get_animation_time(mob.animator, "Attack")
 	if anim_time <= attack_delay:
 		print("ERROR: won't attack if animation time is less then attack_delay")
 	
