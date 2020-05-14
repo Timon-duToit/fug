@@ -29,11 +29,8 @@ func physics_process(delta : float) -> void:
 	var normalized_position = _retract_animation.value
 	grappling_hook.collider.position = Vector2.RIGHT * hook_to_target.length() * normalized_position + grappling_hook.idle_position.position
 	grappling_hook.rotation = hook_to_target.angle()
-
-	var ga = grappling_hook.grappled_actor
-	if ga:
-		# move actor closer to grappling center
-		ga.position = ga.position.linear_interpolate(Vector2.ZERO, 20 * delta)
+	
+	_center_actor(delta)
 	
 	if done:
 		grappling_hook.emit_signal("done")
@@ -41,6 +38,16 @@ func physics_process(delta : float) -> void:
 			controller.change_to("Shield")
 		else:
 			controller.change_to("Idle")
+
+func _center_actor(delta : float) -> void:
+	var ga = grappling_hook.grappled_actor
+	if not ga: return
+	ga.position = ga.position.linear_interpolate(Vector2.ZERO, 7 * delta)
+	# TODO: maybe let the mob do this?
+	var delta_angle = PI / 2 - ga.rotation
+	if abs(delta_angle) > PI:
+		delta_angle = delta_angle - sign(delta_angle) * 2 * PI
+	ga.rotation += lerp(0, delta_angle, delta * 10)
 
 func on_Parent_body_entered(body: Node) -> void:
 	if grappling_hook.has_actor: return
