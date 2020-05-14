@@ -2,7 +2,7 @@ extends State
 
 export var shove_strength : float = 400
 
-onready var _sword : NewSword = owner as NewSword
+onready var _sword : Sword = owner as Sword
 
 func enter(collider_ : StateMachine) -> void:
 	.enter(collider_)

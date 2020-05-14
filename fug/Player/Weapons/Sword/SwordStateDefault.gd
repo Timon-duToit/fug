@@ -1,6 +1,6 @@
 extends State
 
-onready var _sword = owner as NewSword
+onready var _sword = owner as Sword
 
 func enter(controller_ : StateMachine):
 	.enter(controller_)

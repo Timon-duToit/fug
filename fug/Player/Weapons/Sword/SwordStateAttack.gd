@@ -6,7 +6,7 @@ export var windup_time : float = 0.2
 
 var _attacking := false
 
-onready var _sword : NewSword = owner as NewSword
+onready var _sword : Sword = owner as Sword
 
 func enter(collider_ : StateMachine) -> void:
 	.enter(collider_)

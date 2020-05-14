@@ -7,7 +7,7 @@
 [ext_resource path="res://BaseScripts/StateMachine.gd" type="Script" id=5]
 [ext_resource path="res://Player/States/Default.gd" type="Script" id=6]
 [ext_resource path="res://Player/States/Melee.gd" type="Script" id=7]
-[ext_resource path="res://Player/Weapons/Sword/NewSword.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Player/Weapons/Sword/Sword.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Player/States/Death.gd" type="Script" id=9]
 [ext_resource path="res://Player/Assets/sprPBackBlunt_strip5.png" type="Texture" id=10]
 [ext_resource path="res://Player/Assets/sprPKneel_strip5.png" type="Texture" id=11]
@@ -281,7 +281,7 @@ skew = 4.37114e-08
 skew = 4.37114e-08
 frames = SubResource( 44 )
 animation = "Shove"
-frame = 5
+frame = 9
 playing = true
 
 [node name="Sword" parent="Body" instance=ExtResource( 8 )]

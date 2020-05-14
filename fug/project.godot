@@ -54,11 +54,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/States/MoveState.gd"
 }, {
-"base": "PlayerWeapon",
-"class": "NewSword",
-"language": "GDScript",
-"path": "res://Player/Weapons/Sword/NewSword.gd"
-}, {
 "base": "Actor",
 "class": "Player",
 "language": "GDScript",
@@ -99,10 +94,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BaseScripts/StateMachine.gd"
 }, {
-"base": "Area2D",
+"base": "PlayerWeapon",
 "class": "Sword",
 "language": "GDScript",
-"path": "res://Player/Weapons/Sword.gd"
+"path": "res://Player/Weapons/Sword/Sword.gd"
 }, {
 "base": "Area2D",
 "class": "Weapon",
@@ -119,7 +114,6 @@ _global_script_class_icons={
 "MobState": "",
 "MobStateGrappled": "",
 "MoveState": "",
-"NewSword": "",
 "Player": "",
 "PlayerDefault": "",
 "PlayerDefaultMC": "",

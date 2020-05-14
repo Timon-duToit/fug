@@ -1,6 +1,6 @@
 extends PlayerWeapon
 
-class_name NewSword
+class_name Sword
 
 onready var hit_area := $HitArea
 onready var collider_attack := $HitArea/ColliderAttack
