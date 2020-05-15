@@ -10,6 +10,8 @@
 [ext_resource path="res://Assets/music/music.wav" type="AudioStream" id=8]
 [ext_resource path="res://BaseScripts/CameraShake.gd" type="Script" id=9]
 [ext_resource path="res://Objects/Box.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Mobs/Imp/Imp.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Mobs/Imp/Imp.gd" type="Script" id=8]
 
 [sub_resource type="SegmentShape2D" id=1]
 a = Vector2( -838.515, -526.202 )
@@ -43,27 +45,35 @@ zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true
 script = ExtResource( 9 )
 
+[node name="Imp" parent="." instance=ExtResource( 7 )]
+position = Vector2( -160.524, -99.3074 )
+script = ExtResource( 8 )
+
 [node name="Spawnpoints" type="Node" parent="."]
 
 [node name="Spawnpoint" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( -360.911, 104.956 )
 mob_scene = ExtResource( 4 )
 spawn_time = 2.0
+is_active = false
 
 [node name="Spawnpoint2" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( 644.206, -397.593 )
 mob_scene = ExtResource( 4 )
 spawn_time = 2.0
+is_active = false
 
 [node name="Spawnpoint3" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( -684.927, -257.474 )
 mob_scene = ExtResource( 4 )
 spawn_time = 2.0
+is_active = false
 
 [node name="Spawnpoint4" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( 556.021, 231.89 )
 mob_scene = ExtResource( 4 )
 spawn_time = 2.0
+is_active = false
 
 [node name="Spawnpoint5" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( -153.808, -436.184 )
@@ -79,23 +89,18 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="LevelBoundry"]
-skew = 4.37114e-08
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="LevelBoundry"]
-skew = 4.37114e-08
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="LevelBoundry"]
-skew = 4.37114e-08
 shape = SubResource( 3 )
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="LevelBoundry"]
-skew = 4.37114e-08
 shape = SubResource( 4 )
 
 [node name="Walls" type="StaticBody2D" parent="."]
-skew = 4.37114e-08
 collision_layer = 4
 collision_mask = 3
 __meta__ = {
@@ -117,19 +122,15 @@ shape = SubResource( 5 )
 polygon = PoolVector2Array( -247.335, -4.59378, -648.879, -2.49878, -636.309, 35.2114, -602.091, 48.4798, -297.616, 47.7815, -296.219, 295.691, -262, 295.691, -244.542, 225.159 )
 
 [node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="Walls"]
-skew = 4.37114e-08
 polygon = PoolVector2Array( 542.854, -196.077, 719.324, -207.422, 716.173, -245.237, 665.753, -254.69, 603.358, -245.867, 559.241, -247.127, 544.115, -231.371 )
 
 [node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Walls"]
-skew = 4.37114e-08
 polygon = PoolVector2Array( 704.887, 47.1945, 705.914, 95.4486, 529.324, 98.0154, 456.943, 24.0941, 454.89, -2.08636, 502.63, -2.59971, 503.657, -51.3672, 603.245, -52.3939, 605.812, 43.0877 )
 
 [node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Walls"]
-skew = 4.37114e-08
 polygon = PoolVector2Array( 508.49, 446.702, 607.565, 446.702, 607.052, 345.573, 706.64, 346.6, 705.1, 247.525, 656.846, 247.011, 656.846, 295.266, 556.744, 296.292, 554.691, 396.907, 507.463, 397.934 )
 
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Walls"]
-skew = 4.37114e-08
 polygon = PoolVector2Array( 357.017, 597.008, 354.224, 272.281, 280.898, 196.162, 257.155, 194.766, 255.06, 243.649, 204.779, 245.744, 203.383, 344.21, 305.34, 348.4, 304.642, 594.913 )
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Walls"]
@@ -152,7 +153,6 @@ polygon = PoolVector2Array( -858.187, -429.327, -766.171, -421.764, -730.877, -3
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 2.51758, 45.9825 )
-skew = 4.37114e-08
 z_index = -100
 texture = ExtResource( 1 )
 __meta__ = {

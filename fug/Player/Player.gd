@@ -15,6 +15,7 @@ func _ready() -> void:
 	movement_controller.init(self, body)
 
 func die() -> void:
+	.die()
 	state_machine.change_to("Death")
 
 func play_animation(name : String) -> void:
