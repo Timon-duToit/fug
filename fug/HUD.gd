@@ -19,8 +19,6 @@ func show_game_over():
 
 	$StartButton.show()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
-
+func _on_StartButton_pressed():
+	SceneChanger.change_scene("res://Scenes/Main.tscn")

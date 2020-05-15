@@ -105,12 +105,13 @@ _global_script_class_icons={
 [application]
 
 config/name="fug"
-run/main_scene="res://Scenes/Main.tscn"
+run/main_scene="res://Scenes/HUD.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 GameManager="*res://BaseScripts/GameManager.gd"
+SceneChanger="*res://Scenes/SceneChanger.tscn"
 
 [input]
 
