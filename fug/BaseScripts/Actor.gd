@@ -44,3 +44,16 @@ func be_ungrappled() -> void:
 func _reset_physics() -> void:
 	collision_layer = _default_collision_layer
 	collision_mask = _default_collision_mask
+	
+func can_see(actor : Actor) -> bool:
+	var space_state = get_world_2d().direct_space_state
+	var result = space_state.intersect_ray(global_position, actor.global_position, [], Util.LAYER_WALLS)
+	return result.empty()
+
+func measure_distance(direction : Vector2, max_range : float = 10000) -> float:
+	# NOTE: max range is reltive to direction vector length
+	var space_state = get_world_2d().direct_space_state
+	var result = space_state.intersect_ray(global_position, global_position + direction * max_range, [], Util.LAYER_WALLS)
+	if result.empty():
+		return INF
+	return result["position"].distance_to(global_position)

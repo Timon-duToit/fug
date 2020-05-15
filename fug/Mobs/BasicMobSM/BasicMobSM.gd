@@ -34,5 +34,5 @@ func be_weapon() -> void:
 func get_shoved(impulse : Vector2) -> void:
 	die()
 	# TODO: add actor mass (maybe move this method to actor too?)
-	movement_controller._speed = impulse
+	movement_controller.speed = impulse
 	_state_machine.change_to("Shoved")

@@ -20,9 +20,12 @@ func _allow_attack() -> void:
 func process(delta : float) -> void:
 	.process(delta)
 	var player := GameManager.player
-	var delta_player := GameManager.player.position - _mob.position
+	if not _mob.can_see_player():
+		controller.change_to("Reorient")
+		return
 	
-	_mob.movement_controller.speed_target = delta_player.normalized() * speed
+	var delta_player := GameManager.player.position - _mob.position
+	_mob.movement_controller.target_speed = delta_player.normalized() * speed
 	
 	if _mob.movement_controller.get_speed() > 5:
 		_mob.play_animation("Walk")
@@ -34,6 +37,3 @@ func process(delta : float) -> void:
 	if dist < attack_distance:
 		if _can_attack:
 			controller.change_to("Attack")
-	# TODO: replace with collision check
-	elif dist > untarget_distance:
-		controller.change_to("Walk")

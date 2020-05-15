@@ -8,11 +8,11 @@ func enter(controller_ : StateMachine) -> void:
 	.enter(controller_)
 	_mob.play_animation("Idle")
 	_mob.body_weapon.attack()
-	_mob.movement_controller.active_move = false
-	_mob.movement_controller._speed = Vector2.ZERO
+	_mob.movement_controller.enabled = false
 
 func leave() -> void:
 	.leave()
+	_mob.movement_controller.enabled = true
 	_mob.body_weapon.interrupt_attack()
 
 #func physics_process(delta : float) -> void:

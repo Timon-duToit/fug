@@ -2,48 +2,80 @@ extends Node
 
 class_name BasicMobMC
 
-export var acceleration : float = 20
-export var rotate_acceleration : float = 20
-export var look_at_move : bool = true
+export var enabled := true
+export var do_movement := true
+export var do_speed_lerp := true
+export var do_rotation := true
+export var do_rotation_lerp := true
+export var look_at_move : bool = false
 
-var speed_target := Vector2.ZERO
-var look_at_target := Vector2.RIGHT
-var friction : float = 0
-# if the movement controller tries to change _speed to speed_target
-var active_move := true
+export var do_slide := true
 
-var _speed := Vector2.ZERO
+export var speed_control_tension : float = 20
+export var rotational_tension : float = 20
 
-onready var _mob : Mob = owner
+export var friction : float = 0
+export var target_speed := Vector2.ZERO
+export var target_look := Vector2.RIGHT
+
+enum Mode {CONTROL, FRICTION, NONE}
+
+export var mode := Mode.CONTROL
+
+# the current speed of the controller
+var speed := Vector2.ZERO setget , speed_get
+
+var has_collided := false
+var has_collided_last_update := false
+
+onready var _target : KinematicBody2D = owner as KinematicBody2D
 
 func _physics_process(delta: float) -> void:
-	if look_at_move && speed_target.length() > 0:
-		look_at_target = speed_target
-	_rotate(delta)
-	_move(delta)
+	if look_at_move && target_speed.length() > 0:
+		target_look = target_speed
+	if do_rotation:
+		_rotate(delta)
+	if do_movement:
+		_move(delta)
 
 func _rotate(delta : float) -> void:
-	var delta_angle = look_at_target.angle() - _mob.rotation
+	var delta_angle = target_look.angle() - _target.rotation
 	if abs(delta_angle) > PI:
 		delta_angle = delta_angle - sign(delta_angle) * 2 * PI
-	# HACK: don't use delta here. use proper formula or curve
-	_mob.rotation += lerp(0, delta_angle, rotate_acceleration * delta)
+	if do_rotation_lerp:
+		# HACK: don't use delta here. use proper formula or curve
+		delta_angle = lerp(0, delta_angle, speed_control_tension * delta)
+	_target.rotation += delta_angle
 
 func _move(delta : float) -> void:
-	if active_move:
-		_speed = lerp(_speed, speed_target, delta * acceleration)
-	if friction:
-		_decrease_velocity(delta * friction)
-	_mob.move_and_slide(_speed)
+	if mode == Mode.CONTROL:
+		if do_speed_lerp:
+			speed = lerp(speed, target_speed, delta * speed_control_tension)
+		else:
+			speed = target_speed
+	elif mode == Mode.FRICTION && friction:
+		_apply_friction(friction, delta)
+	
+	has_collided_last_update = has_collided
+	if do_slide:
+		has_collided = _target.move_and_slide(speed) != speed
+	else:
+		has_collided = _target.move_and_collide(speed * delta) != null
 
-func _decrease_velocity(amount : float):
-	# returns the new velocity
-	if amount > _speed.length():
-		_speed = Vector2.ZERO
-		return 0
-	_speed -= _speed.normalized() * amount
-	return _speed.length()
+func _apply_friction(friction : float, delta : float):
+	var amount := friction * delta
+	slowdown(amount)
 
+func slowdown(amount : float) -> void:
+	if amount > speed.length():
+		speed = Vector2.ZERO
+	speed -= speed.normalized() * amount
 
 func get_speed() -> float:
-	return _speed.length()
+	return speed.length()
+
+func speed_get() -> Vector2:
+	return speed
+
+func stop() -> void:
+	target_speed = Vector2.ZERO

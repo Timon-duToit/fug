@@ -22,3 +22,6 @@ func play_animation(name : String) -> void:
 
 func set_collider_disabled(state : bool) -> void:
 	_collider.set_deferred("disabled", state)
+
+func get_rotation() -> float:
+	return body.rotation

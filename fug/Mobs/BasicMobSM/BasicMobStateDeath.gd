@@ -6,7 +6,7 @@ onready var _mob : BasicMob = owner as BasicMob
 
 func enter(controller_ : StateMachine) -> void:
 	.enter(controller_)
-	_mob.movement_controller.speed_target = Vector2.ZERO
+	_mob.movement_controller.target_speed = Vector2.ZERO
 	if _mob.animator.animation != "Death":
 		_mob.play_animation("Death")
 		_mob.animator.rotate(PI)

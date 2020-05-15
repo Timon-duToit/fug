@@ -14,6 +14,9 @@ func leave() -> void:
 	is_active = false
 	_callbacks = []
 
+func change_to(target_state : String) -> void:
+	controller.change_to(target_state)
+
 func process(delta : float) -> void:
 	var to_remove = []
 	for c in _callbacks:
