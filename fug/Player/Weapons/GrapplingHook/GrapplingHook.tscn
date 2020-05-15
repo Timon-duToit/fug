@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Player/Weapons/GrapplingHook/GrapplingHook.gd" type="Script" id=1]
 [ext_resource path="res://Player/Weapons/GrapplingHook/RetractCurve.tres" type="Curve" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Player/Weapons/Assets/Tentacle.png" type="Texture" id=12]
 [ext_resource path="res://Player/Weapons/GrapplingHook/ReactionCurve.tres" type="Curve" id=13]
 [ext_resource path="res://Player/Weapons/GrapplingHook/GrapplingHookShader.tres" type="Material" id=14]
+[ext_resource path="res://Player/Weapons/GrapplingHook/Resetting.gd" type="Script" id=15]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.40735
@@ -76,6 +77,9 @@ script = ExtResource( 6 )
 reaction_curve = ExtResource( 13 )
 distance_curve = SubResource( 2 )
 angle_curve = SubResource( 3 )
+
+[node name="Resetting" type="Node" parent="StateMachine"]
+script = ExtResource( 15 )
 
 [node name="SpriteDebug" type="Sprite" parent="."]
 visible = false

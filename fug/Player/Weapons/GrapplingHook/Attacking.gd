@@ -35,7 +35,6 @@ func physics_process(delta : float) -> void:
 
 func on_Parent_body_entered(body: Node) -> void:
 	if body is Actor:
-		body.be_grappled()
 		grappling_hook.grab_actor(body)
 	controller.change_to("Retracting")
 

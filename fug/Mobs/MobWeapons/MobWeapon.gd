@@ -7,6 +7,8 @@ signal done
 
 export var damage : int = 100
 
+var _ignored_actors = []
+
 var _on_hit : FuncRef
 var is_attacking setget , is_attacking_get
 
@@ -23,6 +25,7 @@ func attack_done() -> void:
 	emit_signal("done")
 
 func _on_hit_default(actor : Actor) -> void:
+	if _is_ignored(actor): return
 	actor.hit(damage)
 	emit_signal("hit", actor)
 
@@ -34,3 +37,11 @@ func is_attacking_set(value):
 
 func is_attacking_get() -> bool:
 	return is_attacking
+
+func _is_ignored(actor : Actor) -> bool:
+	return actor in _ignored_actors
+
+func ignore_actor(actor : Actor) -> void:
+	if not actor:
+		print("Can't ignore non actor %s", actor)
+	_ignored_actors.append(actor)

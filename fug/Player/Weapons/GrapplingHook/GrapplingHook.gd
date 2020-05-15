@@ -5,6 +5,10 @@ class_name GrapplingHook
 signal done
 signal drop_body
 
+# The distance of the CENTER of the body to the player
+# TODO: update this automatically using raycasts
+export var shield_dist : float = 20
+
 onready var collider : CollisionShape2D = $Area
 onready var idle_position : Node2D = $IdlePosition
 onready var line : Line2D = $Line2D
@@ -37,38 +41,17 @@ func _on_Body_death() -> void:
 
 func grab_actor(actor : Actor) -> void:
 	assert(actor)
+	actor.be_grappled()
 	_grappled_actor = actor
 	_has_actor = true
-	call_deferred("_grab_body", actor)
 	actor.connect("death", self, "_on_Body_death")
 
 func drop_actor() -> void:
 	_has_actor = false
-	call_deferred("_drop_body", _grappled_actor)
 	_grappled_actor.disconnect("death", self, "_on_Body_death")
 	_grappled_actor.be_ungrappled()
 	_grappled_actor = null
 	emit_signal("drop_body")
-
-func _grab_body(actor : Actor) -> void:
-	# HACK: clean this up
-	var glob_pos = actor.global_position
-	var glob_rot = actor.global_rotation
-	_previous_body_parent = actor.get_parent()
-	_previous_body_parent.remove_child(actor)
-	collider.add_child(actor)
-	actor.global_position = glob_pos
-	actor.global_rotation = glob_rot
-
-func _drop_body(actor : Actor) -> void:
-	var glob_pos = actor.global_position
-	var glob_rot = actor.global_rotation
-	actor.get_parent().remove_child(actor)
-	_previous_body_parent.add_child(actor)
-	actor.global_position = glob_pos
-	actor.global_rotation = glob_rot
-	actor.global_rotation = glob_rot
-	_previous_body_parent = null
 
 func get_has_actor() -> bool:
 	return _has_actor
@@ -79,3 +62,16 @@ func get_grappled_actor() -> Actor:
 	else:
 		# We still have a reference to the actor but it will get dropped asap
 		return null
+
+func move_actor_to(pos : Vector2, delta : float) -> Vector2:
+	# tries to move actor to relative position and returns delta between goal move and actual move
+	if not delta || not _grappled_actor: return Vector2.INF
+	var goal_pos := pos
+	_grappled_actor.move_and_slide((goal_pos - _grappled_actor.position) / delta)
+	return _grappled_actor.position - goal_pos
+
+func fix_to_collider() -> void:
+	if not _grappled_actor: return
+	var delta_vector = _grappled_actor.global_position - global_position
+	rotation = delta_vector.angle()
+	collider.position = Vector2.RIGHT * delta_vector.length()

@@ -33,11 +33,15 @@ func physics_process(delta : float) -> void:
 	
 	_target_position = update_target_position(delta, _target_position)
 	_enforce_max_range()
+	
 	# TODO: include the grappling hook initial position?
 	var hook_to_target = _target_position - grappling_hook.global_position
 	hook_to_target *= _distance_animation.value
-	grappling_hook.collider.position = Vector2.RIGHT * hook_to_target.length() + grappling_hook.idle_position.position
-	grappling_hook.rotation = hook_to_target.angle() + _angle_animation.value
+	hook_to_target = hook_to_target.normalized() * (hook_to_target.length() + grappling_hook.shield_dist)
+	hook_to_target = hook_to_target.rotated(_angle_animation.value)
+	
+	grappling_hook.move_actor_to(hook_to_target + grappling_hook.global_position, delta)
+	grappling_hook.fix_to_collider()
 	
 	update_line_renderer()
 	

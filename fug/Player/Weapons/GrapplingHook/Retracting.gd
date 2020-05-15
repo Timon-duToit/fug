@@ -22,15 +22,9 @@ func process(delta : float) -> void:
 	update_line_renderer()
 
 func physics_process(delta : float) -> void:
-	var done := _retract_animation.update(delta)
-	_target_position = update_target_position(delta, _target_position)
-	# TODO: perhaps just lerp the position and don't use curve?
-	var hook_to_target := _target_position - grappling_hook.idle_position.global_position
-	var normalized_position = _retract_animation.value
-	grappling_hook.collider.position = Vector2.RIGHT * hook_to_target.length() * normalized_position + grappling_hook.idle_position.position
-	grappling_hook.rotation = hook_to_target.angle()
+	var done = _move_hook(delta)
 	
-	_center_actor(delta)
+	grappling_hook.move_actor_to(grappling_hook.collider.global_position, delta)
 	
 	if done:
 		grappling_hook.emit_signal("done")
@@ -39,15 +33,17 @@ func physics_process(delta : float) -> void:
 		else:
 			controller.change_to("Idle")
 
-func _center_actor(delta : float) -> void:
-	var ga = grappling_hook.grappled_actor
-	if not ga: return
-	ga.position = ga.position.linear_interpolate(Vector2.ZERO, 7 * delta)
-	# TODO: maybe let the mob do this?
-	var delta_angle = PI / 2 - ga.rotation
-	if abs(delta_angle) > PI:
-		delta_angle = delta_angle - sign(delta_angle) * 2 * PI
-	ga.rotation += lerp(0, delta_angle, delta * 10)
+func _move_hook(delta : float) -> bool:
+	# returns if the retraction is completed
+	var done := _retract_animation.update(delta)
+	_target_position = update_target_position(delta, _target_position)
+	# TODO: perhaps just lerp the position and don't use curve?
+	var hook_to_target := _target_position - grappling_hook.global_position
+	var normalized_position := _retract_animation.value
+	var target_distance := (hook_to_target.length() - grappling_hook.shield_dist) * normalized_position
+	grappling_hook.collider.position = Vector2.RIGHT * (target_distance + grappling_hook.shield_dist)
+	grappling_hook.rotation = hook_to_target.angle()
+	return done
 
 func on_Parent_body_entered(body: Node) -> void:
 	if grappling_hook.has_actor: return

@@ -10,6 +10,9 @@ onready var hit_audio := $Hit
 onready var death_audio := $Death
 onready var body_weapon : BodyWeapon = $BodyWeapon
 
+func _ready() -> void:
+	body_weapon.ignore_actor(self)
+
 func die() -> void:
 	.die()
 	if not _state_machine.is_current_state("Death") and not _state_machine.is_current_state("Shoved"):
@@ -19,9 +22,14 @@ func play_animation(animation : String) -> void:
 	animator.play(animation)
 
 func be_grappled() -> bool:
-	.be_grappled()
-	_state_machine.change_to("Grappled")
+	_state_machine.change_to("Weaponized")
 	return true
+
+func be_shield() -> void:
+	_state_machine.change_to("Grappled")
+
+func be_weapon() -> void:
+	_state_machine.change_to("Weaponized")
 
 func get_shoved(impulse : Vector2) -> void:
 	die()

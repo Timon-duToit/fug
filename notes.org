@@ -4,7 +4,7 @@
 ** Bugs
 - [-] Statemachine Should control sword
 - [ ] Make Grappling hook target not move further away during retreat
-- [ ] Mob not properly captured if captured on retraction
+- [-] Mob not properly captured if captured on retraction
 ** Statemachine
 - [-] General dependency cleanup
 - [-] Make grappling Hook drop enemy on death and notify state to change
@@ -15,14 +15,15 @@
 ** Grappling Hook
 - [-] Allow grappling during retreat
   - [-] Do pouch Throw if hit during retreat
-- [ ] Update hook position according to mob.
+- [-] Update hook position according to mob.
+- [ ] Detach on fail to move distance (or perhaps raycast?)
 ** Game structure
 - [ ] Give mobs a way to reference each other
   - [ ] Limit spawning space
 - [ ] Implement wave system (e.g. Mob  / amount dictionary / class)
-- [ ] Add hp.
-- [ ] Mob weapon add ignore actor list so that it can target other stuff then player
-- [ ] MobBody add player to possible collisions
+- [-] Add hp.
+- [-] Mob weapon add ignore actor list so that it can target other stuff then player
+- [-] MobBody add player to possible collisions
 ** Game feel
 - [ ] Allow "super shove" on attack -> dash as long as attack has not yet started
 - [ ] Write better screen shake
@@ -33,9 +34,11 @@
   - Maybe some blood effects
   - The Damage can also change how the player controls / what abilities he as
   - Should be balanced e.g. more speed less damage (or probably the other way around)
+- [ ] Make Grappling Hook distance depend on length of button pressed (Mace)
 ** Game Code
 - [ ] Baseball -> Shoved but not dead (stumbling) dash attack in same direction
   for "ultra" shove
+- [ ] Rewrite Movement Controller for player and mob.
 
 * Game Description
 ** Physics
