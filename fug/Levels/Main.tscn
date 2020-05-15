@@ -6,12 +6,10 @@
 [ext_resource path="res://Mobs/SmartMob/SmartMob.tscn" type="PackedScene" id=4]
 [ext_resource path="res://BaseScripts/LevelManager.gd" type="Script" id=5]
 [ext_resource path="res://BaseScripts/Spawnpoint.tscn" type="PackedScene" id=6]
-[ext_resource path="res://icon.png" type="Texture" id=7]
-[ext_resource path="res://Assets/music/music.wav" type="AudioStream" id=8]
-[ext_resource path="res://BaseScripts/CameraShake.gd" type="Script" id=9]
-[ext_resource path="res://Objects/Box.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Mobs/Imp/Imp.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Mobs/Imp/Imp.gd" type="Script" id=8]
+[ext_resource path="res://BaseScripts/CameraShake.gd" type="Script" id=9]
+[ext_resource path="res://Objects/Box.tscn" type="PackedScene" id=10]
 
 [sub_resource type="SegmentShape2D" id=1]
 a = Vector2( -838.515, -526.202 )
@@ -54,31 +52,27 @@ script = ExtResource( 8 )
 [node name="Spawnpoint" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( -360.911, 104.956 )
 mob_scene = ExtResource( 4 )
-spawn_time = 2.0
-is_active = false
+spawn_time = 1.25
 
 [node name="Spawnpoint2" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( 644.206, -397.593 )
 mob_scene = ExtResource( 4 )
-spawn_time = 2.0
-is_active = false
+spawn_time = 1.25
 
 [node name="Spawnpoint3" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( -684.927, -257.474 )
 mob_scene = ExtResource( 4 )
-spawn_time = 2.0
-is_active = false
+spawn_time = 1.25
 
 [node name="Spawnpoint4" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( 556.021, 231.89 )
 mob_scene = ExtResource( 4 )
-spawn_time = 2.0
-is_active = false
+spawn_time = 1.25
 
 [node name="Spawnpoint5" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( -153.808, -436.184 )
 mob_scene = ExtResource( 4 )
-spawn_time = 2.0
+spawn_time = 1.25
 
 [node name="LevelBoundry" type="StaticBody2D" parent="."]
 skew = 4.37114e-08
@@ -164,10 +158,8 @@ visible = false
 
 [node name="Sprite" type="Sprite" parent="DebugNode"]
 scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 7 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
 volume_db = -36.006
 autoplay = true
 
