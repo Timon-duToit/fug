@@ -58,3 +58,6 @@ func _notification(what: int) -> void:
 func _on_Parent_body_entered(body: Node) -> void:
 	if state.has_method("on_Parent_body_entered"):
 		state.on_Parent_body_entered(body)
+
+func is_current_state(name : String):
+	return state.name == name

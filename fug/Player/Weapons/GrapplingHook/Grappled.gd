@@ -2,6 +2,7 @@ extends GrapplingHookState
 
 func enter(controller_ : StateMachine) -> void:
 	.enter(controller_)
+	grappling_hook.grappled_actor.be_shield()
 	grappling_hook.connect("drop_body", self, "_on_GrapplingHook_drop_body")
 
 func leave() -> void:

@@ -1,9 +1,8 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/Background.jpg" type="Texture" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://BaseScripts/CameraFollower.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Mobs/MobOld.tscn" type="PackedScene" id=4]
 [ext_resource path="res://BaseScripts/LevelManager.gd" type="Script" id=5]
 [ext_resource path="res://BaseScripts/Spawnpoint.tscn" type="PackedScene" id=6]
 [ext_resource path="res://icon.png" type="Texture" id=7]
@@ -49,34 +48,34 @@ position = Vector2( 90.9621, -7.62939e-06 )
 skew = 4.37114e-08
 
 [node name="BasicMobSM2" parent="." instance=ExtResource( 11 )]
-position = Vector2( 171.597, -2.7805 )
+position = Vector2( 154.119, 46.0769 )
 skew = 4.37114e-08
 
 [node name="Spawnpoints" type="Node" parent="."]
 
 [node name="Spawnpoint" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( -360.911, 104.956 )
-mob_scene = ExtResource( 4 )
+mob_scene = ExtResource( 11 )
 is_active = false
 
 [node name="Spawnpoint2" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( 644.206, -397.593 )
-mob_scene = ExtResource( 4 )
+mob_scene = ExtResource( 11 )
 is_active = false
 
 [node name="Spawnpoint3" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( -684.927, -257.474 )
-mob_scene = ExtResource( 4 )
+mob_scene = ExtResource( 11 )
 is_active = false
 
 [node name="Spawnpoint4" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( 556.021, 231.89 )
-mob_scene = ExtResource( 4 )
+mob_scene = ExtResource( 11 )
 is_active = false
 
 [node name="Spawnpoint5" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( -153.808, -436.184 )
-mob_scene = ExtResource( 4 )
+mob_scene = ExtResource( 11 )
 is_active = false
 
 [node name="LevelBoundry" type="StaticBody2D" parent="."]

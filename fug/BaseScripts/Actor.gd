@@ -23,10 +23,9 @@ func burn(damage : int) -> void:
 func die() -> void:
 	emit_signal("death")
 	collision_layer = 0
-	collision_mask = 0
+	collision_mask = Util.LAYER_WALLS
 
 func get_shoved(impulse : Vector2) -> void:
-	_set_grappled_physics()
 	die()
 
 func be_shield() -> void:
@@ -37,18 +36,11 @@ func be_weapon() -> void:
 
 func be_grappled() -> bool:
 	# returns true if the grapple has succeeded
-	_set_grappled_physics()
-	return true
+	return false
 
 func be_ungrappled() -> void:
-	_set_normal_physics()
+	_reset_physics()
 
-func _set_grappled_physics() -> void:
-	# don't collider with player
-	set_collision_mask_bit(1, false)
-	# move to grappled layer
-	collision_layer = 8
-
-func _set_normal_physics() -> void:
+func _reset_physics() -> void:
 	collision_layer = _default_collision_layer
 	collision_mask = _default_collision_mask

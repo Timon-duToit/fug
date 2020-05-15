@@ -221,7 +221,6 @@ alt_attack={
 2d_physics/layer_1="Actors"
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Walls"
-2d_physics/layer_4="Grappled"
 
 [rendering]
 

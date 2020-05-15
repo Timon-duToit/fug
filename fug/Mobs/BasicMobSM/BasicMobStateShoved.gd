@@ -6,6 +6,7 @@ export var min_kill_velocity = 200
 
 func enter(controller_ : StateMachine) -> void:
 	.enter(controller_)
+	_mob.die()
 	_mob.body_weapon.attack()
 	_mob.movement_controller.active_move = false
 	_mob.movement_controller.friction = friction

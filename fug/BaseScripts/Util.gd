@@ -1,5 +1,9 @@
 class_name Util
 
+const LAYER_ACTORS : int = 1
+const LAYER_PLAYER : int = 2
+const LAYER_WALLS : int = 4
+
 # Utility funcitons
 
 static func get_animation_time(animator : AnimatedSprite, animation : String) -> float:

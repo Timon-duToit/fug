@@ -4,6 +4,7 @@
 ** Bugs
 - [-] Statemachine Should control sword
 - [ ] Make Grappling hook target not move further away during retreat
+- [ ] Mob not properly captured if captured on retraction
 ** Statemachine
 - [-] General dependency cleanup
 - [-] Make grappling Hook drop enemy on death and notify state to change
@@ -28,7 +29,13 @@
 - [ ] Longer slow motion that stops when dash is continued
 - [ ] Allow set direction after dash if no button is pressed before
 - [ ] Buffer inputs
-
+- [ ] Different Player animation / sprites for damage
+  - Maybe some blood effects
+  - The Damage can also change how the player controls / what abilities he as
+  - Should be balanced e.g. more speed less damage (or probably the other way around)
+** Game Code
+- [ ] Baseball -> Shoved but not dead (stumbling) dash attack in same direction
+  for "ultra" shove
 
 * Game Description
 ** Physics
