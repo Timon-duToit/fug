@@ -19,10 +19,12 @@ func _on_PayArea_body_exited(player: Player) -> void:
 	player.disconnect("try_buy", self, "_on_Player_try_buy")
 
 func _on_Player_try_buy(player : Player) -> void:
+	print("try buy")
 	if not _active: return
 	if not GameManager.level_manager: return
 	
 	if GameManager.level_manager.sub_money(price):
+		print("bought")
 		emit_signal("bought")
 		if single_activation:
 			_active = false
