@@ -12,7 +12,7 @@ func process(delta : float) -> void:
 func unhandled_input(event : InputEvent) -> void:
 	if event.is_action_pressed("attack"):
 		controller.change_to("Melee")
-	elif event.is_action_pressed("dash") && player.movement_controller.can_dash:
+	elif event.is_action_pressed("dash") && player.movement_controller.can_dash && player.has_dash:
 		controller.change_to("Dash")
-	elif event.is_action_pressed("alt_attack"):
+	elif event.is_action_pressed("alt_attack") && player.has_hook:
 		controller.change_to("Grab")

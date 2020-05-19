@@ -2,28 +2,28 @@
 
 * 2do
 ** Bugs
-- [-] Statemachine Should control sword
+- [X] Statemachine Should control sword
 - [ ] Make Grappling hook target not move further away during retreat
-- [-] Mob not properly captured if captured on retraction
+- [X] Mob not properly captured if captured on retraction
 ** Statemachine
-- [-] General dependency cleanup
-- [-] Make grappling Hook drop enemy on death and notify state to change
-- [-] Update grappling Hook as state machine
+- [X] General dependency cleanup
+- [X] Make grappling Hook drop enemy on death and notify state to change
+- [X] Update grappling Hook as state machine
 ** Player
-- [-] Give player control over everything
-- [-] Use Messages to communicate with weapons ?
+- [X] Give player control over everything
+- [X] Use Messages to communicate with weapons ?
 ** Grappling Hook
-- [-] Allow grappling during retreat
-  - [-] Do pouch Throw if hit during retreat
-- [-] Update hook position according to mob.
+- [X] Allow grappling during retreat
+  - [X] Do pouch Throw if hit during retreat
+- [X] Update hook position according to mob.
 - [ ] Detach on fail to move distance (or perhaps raycast?)
 ** Game structure
 - [ ] Give mobs a way to reference each other
   - [ ] Limit spawning space
 - [ ] Implement wave system (e.g. Mob  / amount dictionary / class)
-- [-] Add hp.
-- [-] Mob weapon add ignore actor list so that it can target other stuff then player
-- [-] MobBody add player to possible collisions
+- [X] Add hp.
+- [X] Mob weapon add ignore actor list so that it can target other stuff then player
+- [X] MobBody add player to possible collisions
 ** Game feel
 - [ ] Allow "super shove" on attack -> dash as long as attack has not yet started
 - [ ] Write better screen shake
@@ -38,7 +38,8 @@
 ** Game Code
 - [ ] Baseball -> Shoved but not dead (stumbling) dash attack in same direction
   for "ultra" shove
-- [ ] Rewrite Movement Controller for player and mob.
+- [ ] Rewrite Movement Controller for player
+- [X] Rewrite Movement Controller for mobs
 
 * Game Description
 ** Physics
@@ -53,6 +54,21 @@
   1. On Death Corpses draw additively (a simplified texture) to corpse RenderTexture (With a pixel of 1)
   2. RenderTexture is blurred
   3. Render texture is converted to Objects by doing some kind of flood fill
+** Wave System
+*** (One) Wave
+Each wave spawns a set number of enemies
+**** Timing
+**** Spawn Location
+
+*** Endless Mode
+Generate random waves with increasing difficulty
+**** Randomness
+**** Difficulty
+
+*** Scripted Mode
+Isn't really interesting yet but perhaps some kind of node based wave system.
+Some Nodes are "Waves" e.g. what will spawn. and other nodes are spawn
+conditions that can be combined by or / and nodes?
 
 * Game
 ** Horde, Waves

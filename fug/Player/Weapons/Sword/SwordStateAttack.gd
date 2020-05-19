@@ -36,8 +36,8 @@ func physics_process(delta: float) -> void:
 
 func _on_HitArea_body_entered(body : Actor) -> void:
 	# HACK: avoid double hit if the collision layer is changed during physics
-	if not body.collision_layer: return
 	if not body: return
+	if not body.collision_layer: return
 	_sword.on_hit(body)
 
 func _audio_effect() -> void:

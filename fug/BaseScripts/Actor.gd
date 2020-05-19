@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 class_name Actor
 
-signal death
+signal death(actor)
 
 export var max_hp : int = 100
 
@@ -21,7 +21,7 @@ func burn(damage : int) -> void:
 	pass
 
 func die() -> void:
-	emit_signal("death")
+	emit_signal("death", self)
 	collision_layer = 0
 	collision_mask = Util.LAYER_WALLS
 

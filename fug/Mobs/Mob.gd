@@ -4,6 +4,11 @@ class_name Mob
 
 export var perception_range : float = 500
 
+func _ready() -> void:
+	# register self on game manager
+	if GameManager.level_manager:
+		GameManager.level_manager.register_mob(self)
+
 func can_see_player() -> bool:
 	return can_see(GameManager.player)
 
