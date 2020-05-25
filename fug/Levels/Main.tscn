@@ -1,9 +1,8 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Assets/Background.jpg" type="Texture" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://BaseScripts/CameraFollower.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Mobs/SmartMob/SmartMob.tscn" type="PackedScene" id=4]
 [ext_resource path="res://BaseScripts/LevelManager.gd" type="Script" id=5]
 [ext_resource path="res://BaseScripts/Spawnpoint.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/MoneyLabel.gd" type="Script" id=7]
@@ -13,6 +12,7 @@
 [ext_resource path="res://Assets/Light.png" type="Texture" id=11]
 [ext_resource path="res://Objects/Door.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Objects/VendingGrappling.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Mobs/PathfindMob/PathfindMob.tscn" type="PackedScene" id=14]
 
 [sub_resource type="SegmentShape2D" id=1]
 a = Vector2( -838.515, -526.202 )
@@ -71,6 +71,11 @@ polygon = PoolVector2Array( -442.433, -156.047, -329.216, -160.12, -259.169, -23
 
 [sub_resource type="OccluderPolygon2D" id=18]
 polygon = PoolVector2Array( -736.498, -187.445, -738.294, -161.101, -853.851, -160.502, -853.851, -420.354, -779.607, -411.972, -766.435, -343.716, -756.855, -291.027, -744.282, -267.077, -761.047, -208.401, -756.257, -194.63 )
+
+[sub_resource type="NavigationPolygon" id=19]
+vertices = PoolVector2Array( 67.9279, 166.258, 235.096, 177.311, 236.046, 228.61, 185.696, 231.46, -218.572, 227.469, -64.72, 162.053, 432.02, 39.1755, 296.845, 176.361, 67.9279, 31.9929, 185.409, -148.984, 311.113, -141.021, 431.451, -17.7041, 726.088, 112.55, 727.225, 34.0563, 744.919, -190.249, 819.763, -477.959, 824.415, 572.458, 726.475, 365.882, -822.279, 565.006, -447.001, 472.588, -133.001, 458.744, 10.8551, 484.582, 282.467, 572.894, 724.269, 229.156, 734.549, -472.825, 737.732, -262.629, 730.442, -425.085, 622.641, -438.945, 665.864, -275.976, 625.208, -384.018, -629.566, -222.267, -724.863, -223.896, -696.499, -339.259, -130.858, -475.776, -127.445, -422.309, -322.054, -333.296, 536.4, -359.891, 601.697, -264.683, 544.716, -266.736, 319.076, -384.466, 530.867, -471.208, 89.8354, -467.813, 201.335, -370.815, 93.2481, -422.878, -60.1905, 30.6988, -222.25, -26.3763, -315.769, -137.065, -213.114, -233.435, 64.2395, -375.668, 521.616, -177.415, 623.135, -68.8958, 35.2968, 340.027, 185.696, 359.709, -104.37, 312.792, -239.106, 324.49, -316.107, 318.843, -487.715, 367.81, 523.67, -235.936, 484.918, -72.8774, -658.953, 471.391, -813.476, -126.645, -747.502, -121.758, -680.507, 209.146, 519.046, 120.513, 641.205, 232.096, -746.553, -445.624, -814.24, -449.606, -812.534, -466.101, 626.503, 466.589, 625.033, 362.942, 381.395, 570.608, 490.512, 464.384, 383.295, 260.91, 492.717, 379.114, 642.675, 280.612, 538.292, 280.612, -599.734, 71.8093, -320.435, 71.1459, -567.346, 373.797, -591.894, 217.528, -654.797, 50.58, 536.822, 378.379, 484.349, -18.8417, 285.445, 366.359, -675.363, -23.7226, -626.308, -134.301, -469.402, -128.685, 621.429, 26.0932, -88.7667, -365.43, -467.307, -188.043 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 6, 7, 1, 0, 8, 9, 10, 11 ), PoolIntArray( 12, 13, 14, 15, 16, 17 ), PoolIntArray( 18, 19, 20, 21, 22 ), PoolIntArray( 12, 17, 23 ), PoolIntArray( 24, 15, 14, 25, 26 ), PoolIntArray( 27, 26, 25, 28, 29 ), PoolIntArray( 30, 31, 32, 33, 34, 35 ), PoolIntArray( 36, 29, 28, 37, 38 ), PoolIntArray( 39, 40, 36, 10 ), PoolIntArray( 41, 40, 39, 42, 43 ), PoolIntArray( 44, 45, 46, 47, 48, 42, 9, 8 ), PoolIntArray( 49, 14, 13, 50 ), PoolIntArray( 51, 3, 52, 21 ), PoolIntArray( 4, 3, 51, 53 ), PoolIntArray( 54, 4, 53, 20 ), PoolIntArray( 55, 54, 20, 19, 56 ), PoolIntArray( 10, 36, 38, 57 ), PoolIntArray( 10, 57, 49, 58, 11 ), PoolIntArray( 59, 18, 60, 61, 62 ), PoolIntArray( 63, 12, 23, 64 ), PoolIntArray( 65, 66, 67, 33 ), PoolIntArray( 32, 65, 33 ), PoolIntArray( 68, 69, 17, 16 ), PoolIntArray( 68, 16, 70, 71 ), PoolIntArray( 71, 70, 72, 73 ), PoolIntArray( 63, 64, 74, 75, 72 ), PoolIntArray( 5, 4, 45, 44 ), PoolIntArray( 76, 77, 55, 56, 78, 79 ), PoolIntArray( 76, 79, 62, 80 ), PoolIntArray( 75, 81, 73, 72 ), PoolIntArray( 6, 63, 72, 7 ), PoolIntArray( 58, 82, 11 ), PoolIntArray( 52, 83, 22, 21 ), PoolIntArray( 59, 19, 18 ), PoolIntArray( 80, 62, 61, 84 ), PoolIntArray( 45, 84, 61, 85, 86 ), PoolIntArray( 13, 87, 50 ), PoolIntArray( 49, 50, 58 ), PoolIntArray( 48, 43, 42 ), PoolIntArray( 88, 48, 47, 35 ), PoolIntArray( 34, 88, 35 ), PoolIntArray( 30, 35, 89, 85 ), PoolIntArray( 85, 89, 86 ), PoolIntArray( 45, 86, 46 ) ]
+outlines = [ PoolVector2Array( -812.534, -466.101, -130.858, -475.776, -127.445, -422.309, -88.7667, -365.43, 64.2395, -375.668, 93.2481, -422.878, 89.8354, -467.813, 530.867, -471.208, 536.4, -359.891, 625.208, -384.018, 622.641, -438.945, 730.442, -425.085, 734.549, -472.825, 819.763, -477.959, 824.415, 572.458, 381.395, 570.608, 383.295, 260.91, 296.845, 176.361, 235.096, 177.311, 236.046, 228.61, 185.696, 231.46, 185.696, 359.709, 285.445, 366.359, 282.467, 572.894, -822.279, 565.006, -813.476, -126.645, -747.502, -121.758, -626.308, -134.301, -629.566, -222.267, -724.863, -223.896, -696.499, -339.259, -746.553, -445.624, -814.24, -449.606 ), PoolVector2Array( 201.335, -370.815, 185.409, -148.984, 311.113, -141.021, 319.076, -384.466 ), PoolVector2Array( -60.1905, 30.6988, 67.9279, 31.9929, 67.9279, 166.258, -64.72, 162.053 ), PoolVector2Array( -322.054, -333.296, -213.114, -233.435, -315.769, -137.065, -469.402, -128.685, -467.307, -188.043 ), PoolVector2Array( -316.107, 318.843, -239.106, 324.49, -218.572, 227.469, -222.25, -26.3763, -675.363, -23.7226, -654.797, 50.58, -599.734, 71.8093, -320.435, 71.1459 ), PoolVector2Array( -591.894, 217.528, -567.346, 373.797, -487.715, 367.81, -447.001, 472.588, -658.953, 471.391, -680.507, 209.146 ), PoolVector2Array( 35.2968, 340.027, 10.8551, 484.582, -133.001, 458.744, -104.37, 312.792 ), PoolVector2Array( 490.512, 464.384, 626.503, 466.589, 625.033, 362.942, 726.475, 365.882, 724.269, 229.156, 641.205, 232.096, 642.675, 280.612, 538.292, 280.612, 536.822, 378.379, 492.717, 379.114 ), PoolVector2Array( 623.135, -68.8958, 621.429, 26.0932, 727.225, 34.0563, 726.088, 112.55, 519.046, 120.513, 432.02, 39.1755, 431.451, -17.7041, 484.349, -18.8417, 484.918, -72.8774 ), PoolVector2Array( 521.616, -177.415, 744.919, -190.249, 737.732, -262.629, 665.864, -275.976, 601.697, -264.683, 544.716, -266.736, 523.67, -235.936 ) ]
 
 [node name="Main" type="Node"]
 script = ExtResource( 5 )
@@ -132,27 +137,27 @@ shadow_filter_smooth = 13.0
 
 [node name="Spawnpoint" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( -360.911, 104.956 )
-mob_scene = ExtResource( 4 )
+mob_scene = ExtResource( 14 )
 spawn_time = 1.25
 
 [node name="Spawnpoint2" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( 644.206, -397.593 )
-mob_scene = ExtResource( 4 )
+mob_scene = ExtResource( 14 )
 spawn_time = 1.25
 
 [node name="Spawnpoint3" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( -684.927, -257.474 )
-mob_scene = ExtResource( 4 )
+mob_scene = ExtResource( 14 )
 spawn_time = 1.25
 
 [node name="Spawnpoint4" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( 556.021, 231.89 )
-mob_scene = ExtResource( 4 )
+mob_scene = ExtResource( 14 )
 spawn_time = 1.25
 
 [node name="Spawnpoint5" parent="Spawnpoints" instance=ExtResource( 6 )]
 position = Vector2( -153.808, -436.184 )
-mob_scene = ExtResource( 4 )
+mob_scene = ExtResource( 14 )
 spawn_time = 1.25
 
 [node name="LevelBoundry" type="StaticBody2D" parent="."]
@@ -327,12 +332,12 @@ scale = Vector2( 0.2, 0.2 )
 volume_db = -36.006
 autoplay = true
 
-[node name="Box" parent="." instance=ExtResource( 10 )]
-position = Vector2( -46.2134, -35.2102 )
+[node name="PathfindMob" parent="." instance=ExtResource( 14 )]
+position = Vector2( 385.881, 362.654 )
 skew = 4.37114e-08
 
-[node name="SmartMob" parent="." instance=ExtResource( 4 )]
-position = Vector2( 39.4904, 168.022 )
+[node name="Box" parent="." instance=ExtResource( 10 )]
+position = Vector2( -46.2134, -35.2102 )
 skew = 4.37114e-08
 
 [node name="Door" parent="." instance=ExtResource( 12 )]
@@ -348,6 +353,19 @@ price = 2000
 [node name="Payable2" parent="." instance=ExtResource( 13 )]
 position = Vector2( 265.294, 102.899 )
 scale = Vector2( 0.2, 0.2 )
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
+position = Vector2( 0, 1.23869 )
+navpoly = SubResource( 19 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( -5.84399, 46.7521 )
+zoom = Vector2( 1.652, 1.858 )
 
 [editable path="Spawnpoints/Spawnpoint"]
 
