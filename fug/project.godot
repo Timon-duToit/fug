@@ -183,7 +183,7 @@ _global_script_class_icons={
 [application]
 
 config/name="fug"
-run/main_scene="res://UI/MainMenu.tscn"
+run/main_scene="res://UI/SplashScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
