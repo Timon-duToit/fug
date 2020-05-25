@@ -1,0 +1,169 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://Assets/main_menu_assets/background.png" type="Texture" id=1]
+[ext_resource path="res://Assets/fonts/pixel_font.TTF" type="DynamicFontData" id=2]
+[ext_resource path="res://UI/SplashScreen.gd" type="Script" id=3]
+[ext_resource path="res://Assets/main_menu_assets/fire.png" type="Texture" id=4]
+[ext_resource path="res://Assets/main_menu_assets/backgroundNoise.wav" type="AudioStream" id=5]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 778, 378 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 778, 0, 778, 378 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 1556, 0, 778, 378 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 2334, 0, 778, 378 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 3112, 0, 778, 378 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 3890, 0, 778, 378 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 4668, 0, 778, 378 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 5446, 0, 778, 378 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "default",
+"speed": 6.0
+} ]
+
+[sub_resource type="DynamicFont" id=10]
+size = 36
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=11]
+
+[sub_resource type="DynamicFont" id=12]
+size = 24
+font_data = ExtResource( 2 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 260, 260 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 260, 0, 260, 260 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 520, 0, 260, 260 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 780, 0, 260, 260 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 1040, 0, 260, 260 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 1300, 0, 260, 260 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 1560, 0, 260, 260 )
+
+[sub_resource type="SpriteFrames" id=20]
+animations = [ {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[node name="SplashScreen" type="AnimatedSprite"]
+position = Vector2( -6.42375, -7.59171 )
+scale = Vector2( 1.33275, 1.6271 )
+frames = SubResource( 9 )
+frame = 3
+playing = true
+centered = false
+script = ExtResource( 3 )
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -201.0
+margin_top = -18.5
+margin_right = 201.0
+margin_bottom = 18.5
+rect_pivot_offset = Vector2( -576.359, 84.2316 )
+custom_fonts/font = SubResource( 10 )
+text = "The Dark Ages"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = -100.0
+theme = SubResource( 11 )
+custom_fonts/font = SubResource( 12 )
+text = "START"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fire1" type="AnimatedSprite" parent="."]
+position = Vector2( 238.227, 265 )
+scale = Vector2( 0.392523, 0.392523 )
+frames = SubResource( 20 )
+frame = 5
+playing = true
+
+[node name="Fire2" type="AnimatedSprite" parent="."]
+position = Vector2( 540.242, 265 )
+scale = Vector2( 0.392523, 0.392523 )
+frames = SubResource( 20 )
+frame = 5
+playing = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -10.0
+autoplay = true
+[connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
