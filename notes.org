@@ -3,7 +3,6 @@
 * 2do
 ** Bugs
 - [X] Statemachine Should control sword
-- [ ] Make Grappling hook target not move further away during retreat
 - [X] Mob not properly captured if captured on retraction
 ** Statemachine
 - [X] General dependency cleanup
@@ -18,8 +17,8 @@
 - [X] Update hook position according to mob.
 - [ ] Detach on fail to move distance (or perhaps raycast?)
 ** Game structure
-- [ ] Give mobs a way to reference each other
-  - [ ] Limit spawning space
+- [X] Give mobs a way to reference each other
+  - [X] Limit spawning space
 - [ ] Implement wave system (e.g. Mob  / amount dictionary / class)
 - [X] Add hp.
 - [X] Mob weapon add ignore actor list so that it can target other stuff then player
