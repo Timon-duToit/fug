@@ -8,6 +8,7 @@ export var spawn_limit : int = 50
 
 onready var player : Player = $Player
 onready var debug_node : Node2D = $DebugNode
+onready var navigation : Navigation2D = $Navigation2D
 
 var _money : int = 0
 var mobs = []
