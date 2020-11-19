@@ -1,0 +1,29 @@
+PLAYER
+-Since we're rolling with the idea that you are the monster, I think we should have the player gradually 'level up' 
+or evolve into a stronger character throughout the successive waves. At first he can start as a human-octopus hybrid, 
+that has tentacle attacks. Light attack, heavy (or melee and ranged?) and grapple. Then he become better and gets bat wings, for jumping/aerial 
+attacks (or dodging or changing elavation). Wings can then fold in front of the character to act as a shield for blocking.
+Disolve shader with semi-transluscent end image can serve as a 'hide' or stealth ability (especially useful for taking down 
+bosses and brutes).
+
+-Either that, or have the character be one of two or three classes, all different cephalopods: either an octopus-person, a 
+cuttle-fish person or a squid person. Octopus is the agile build (8 tentacles for quick attacks), cuttlefish is the tank build 
+(with the shell and all) and squid is the assualt build (hooks on two tentacles). Unlock some crab claws.
+
+-Or we can mix and match different things. Start off as an octopus-person with tentacle attacks. Collect wings (or unlock them) 
+to change elavation (and mayb block). Unlock hooks to inflict bleed attacks with tentacles. Collect carapace/chitin for armour 
+buffs, lose tentacles (max of 8) when health is lost (0 = death). tentacles regrow.
+
+ENEMIES
+-'Norms' ar just evryday villages yokels that are freaked out b the monster. They only basic weapons (Spade, pitchfork, broom). 
+-'Heavies' are militia, police.
+-'Brains' are hive-mind/commander units, that hang in the back of a small group of norms, which it 'sends' to try surround or
+ flank the player.
+-'Brutes' are various Lovecraftian monsters that are fearing the rise of the player character, e.g. Shogoths, others
+-'Bosses' are Elder things, gods.
+
+GENERAL MECHANICS
+-TO-DO mentions a different currency for abilities. I suggest that we make a 'Elder Font', 'Aether' (Void Aether?) or other
+magical resouce for this. Or DNA/RNA, which the player character uses to develop enough 'currency' to evolve abilities from 
+a skill tree.
+-Maybe the character can use RNA/DNA/Blood to grow armour (i.e. carapace/chitin).
